@@ -1,8 +1,7 @@
-import { Message, User } from "discord.js"
+import { Message, User, Client } from "discord.js";
 
-export default (bot): void => {
-  bot.on('message', (message: Message): void => {
-
+export default (bot: Client): void => {
+  bot.on("message", (message: Message): void => {
     // Return if it is bot
     if (message.author.bot) return;
 
@@ -14,6 +13,5 @@ export default (bot): void => {
     console.log(`${author.username}: ${messageLower}`);
 
     //
-    
-  })
-}
+  });
+};
