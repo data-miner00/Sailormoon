@@ -57,7 +57,7 @@ export default (bot: Client): void => {
     ) as TextChannel;
 
     if (myServerChannel) {
-      schedule.scheduleJob("* */30 * * * *", function (): void {
+      schedule.scheduleJob("0 0 0 * * *", function (): void {
         myServerChannel.send("hihihihi <@&854571414044016670>");
       });
     }
