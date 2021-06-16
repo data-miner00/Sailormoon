@@ -17,6 +17,10 @@ export default (bot: Client): void => {
       message.channel.send("hey");
     }
 
+    if (messageLower == "test") {
+      message.channel.send(`<@!${message.author.id}>`);
+    }
+
     if (message.type == "USER_PREMIUM_GUILD_SUBSCRIPTION") {
       message.channel.send(`<@!${message.author.id}> you are the best :)`);
     }
