@@ -1,5 +1,6 @@
 import { Client, TextChannel } from "discord.js";
 import * as schedule from "node-schedule";
+import * as moment from 'moment'
 import config from "../config";
 
 export default (bot: Client): void => {
@@ -42,6 +43,7 @@ export default (bot: Client): void => {
 
     if (ycServerChannel) {
       const NITRO_BOOST_ROLE: string = "854547626460184597";
+      let today = new Date();
 
       // Remind to unsubscribe nitro
       schedule.scheduleJob(subscriptionExpiryDate, function (): void {
@@ -49,11 +51,23 @@ export default (bot: Client): void => {
           `<@&${NITRO_BOOST_ROLE}> Time to unsubscribe nitro!!!!!`
         );
       });
+
+      if(today< subscriptionExpiryDate)
+      {
+        schedule.scheduleJob("0 10 * * *",function(): void{
+          let start = moment(today);
+          let end = moment(subscriptionExpiryDate);
+          let diff = end.diff(start,"days");
+          ycServerChannel.send(`Bello handsomes 🐱‍🚀 Your Nitro Booster left **${diff} days**.... Have a nice day Sir!`);
+        });
+      }
+
+
     }
 
     // My Test server
     const myServerChannel: TextChannel = bot.channels.cache.get(
-      "854539522536636446"
+      "798790808161091607"
     ) as TextChannel;
 
     if (myServerChannel) {
