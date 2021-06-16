@@ -13,5 +13,8 @@ export default (bot: Client): void => {
     console.log(`${author.username}: ${messageLower}`);
 
     //
+    if (messageLower == "hi") {
+      message.channel.send("hey");
+    }
   });
 };
