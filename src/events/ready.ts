@@ -1,6 +1,6 @@
 import { Client, TextChannel } from "discord.js";
 import * as schedule from "node-schedule";
-import * as moment from 'moment'
+import * as moment from "moment";
 import config from "../config";
 
 export default (bot: Client): void => {
@@ -44,7 +44,6 @@ export default (bot: Client): void => {
     if (ycServerChannel) {
       const NITRO_BOOST_ROLE: string = "854547626460184597";
 
-
       // Remind to unsubscribe nitro
       schedule.scheduleJob(subscriptionExpiryDate, function (): void {
         ycServerChannel.send(
@@ -52,42 +51,40 @@ export default (bot: Client): void => {
         );
       });
 
-
-        schedule.scheduleJob("0 10 * * *",function(): void{
-          let today = new Date();
-          if(today< subscriptionExpiryDate)
-          {
-              let start = moment(today);
-              let end = moment(subscriptionExpiryDate);
-              let diff = end.diff(start,"days");
-              ycServerChannel.send(`Bello handsomes 🐱‍🚀 Your Nitro Booster left **${diff} days**.... Have a nice day Sir!`);          
-          }
-        });
-      }
-
-
-
-    // My Test server
-    const myServerChannel: TextChannel = bot.channels.cache.get(
-      "798790808161091607"
-    ) as TextChannel;
-
-    if (myServerChannel) {
-
-      let today = new Date();
-      schedule.scheduleJob("0 0 0 * * *", function (): void {
-        myServerChannel.send("hihihihi <@&854571414044016670>");
-      });
-
-            if(today< subscriptionExpiryDate)
-      {
-        schedule.scheduleJob("18 11 * * *",function(): void{
+      schedule.scheduleJob("0 10 * * *", function (): void {
+        let today = new Date();
+        if (today < subscriptionExpiryDate) {
           let start = moment(today);
           let end = moment(subscriptionExpiryDate);
-          let diff = end.diff(start,"days");
-          myServerChannel.send(`Bello handsomes 🐱‍🚀 Your Nitro Booster left **${diff} days**.... Have a nice day Sir!`);
-        });
-      }
+          let diff = end.diff(start, "days");
+          ycServerChannel.send(
+            `Bello handsomes 🐱‍🚀 Your Nitro Booster left **${diff} days**.... Have a nice day Sir!`
+          );
+        }
+      });
     }
+
+    // My Test server
+    // const myServerChannel: TextChannel = bot.channels.cache.get(
+    //   "798790808161091607"
+    // ) as TextChannel;
+
+    // if (myServerChannel) {
+
+    //   let today = new Date();
+    //   schedule.scheduleJob("0 0 0 * * *", function (): void {
+    //     myServerChannel.send("hihihihi <@&854571414044016670>");
+    //   });
+
+    //         if(today< subscriptionExpiryDate)
+    //   {
+    //     schedule.scheduleJob("18 11 * * *",function(): void{
+    //       let start = moment(today);
+    //       let end = moment(subscriptionExpiryDate);
+    //       let diff = end.diff(start,"days");
+    //       myServerChannel.send(`Bello handsomes 🐱‍🚀 Your Nitro Booster left **${diff} days**.... Have a nice day Sir!`);
+    //     });
+    //   }
+    // }
   });
 };
