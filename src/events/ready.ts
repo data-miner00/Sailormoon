@@ -43,7 +43,7 @@ export default (bot: Client): void => {
 
     if (ycServerChannel) {
       const NITRO_BOOST_ROLE: string = "854547626460184597";
-      let today = new Date();
+
 
       // Remind to unsubscribe nitro
       schedule.scheduleJob(subscriptionExpiryDate, function (): void {
@@ -52,19 +52,20 @@ export default (bot: Client): void => {
         );
       });
 
-      if(today< subscriptionExpiryDate)
-      {
+
         schedule.scheduleJob("0 10 * * *",function(): void{
-          let start = moment(today);
-          let end = moment(subscriptionExpiryDate);
-          let diff = end.diff(start,"days");
-          ycServerChannel.send(`Bello handsomes 🐱‍🚀 Your Nitro Booster left **${diff} days**.... Have a nice day Sir!`);
-          today.setDate(today.getDate()+1);
+          let today = new Date();
+          if(today< subscriptionExpiryDate)
+          {
+              let start = moment(today);
+              let end = moment(subscriptionExpiryDate);
+              let diff = end.diff(start,"days");
+              ycServerChannel.send(`Bello handsomes 🐱‍🚀 Your Nitro Booster left **${diff} days**.... Have a nice day Sir!`);          
+          }
         });
       }
 
 
-    }
 
     // My Test server
     const myServerChannel: TextChannel = bot.channels.cache.get(
