@@ -59,6 +59,7 @@ export default (bot: Client): void => {
           let end = moment(subscriptionExpiryDate);
           let diff = end.diff(start,"days");
           ycServerChannel.send(`Bello handsomes 🐱‍🚀 Your Nitro Booster left **${diff} days**.... Have a nice day Sir!`);
+          today.setDate(today.getDate()+1);
         });
       }
 
@@ -71,9 +72,21 @@ export default (bot: Client): void => {
     ) as TextChannel;
 
     if (myServerChannel) {
+
+      let today = new Date();
       schedule.scheduleJob("0 0 0 * * *", function (): void {
         myServerChannel.send("hihihihi <@&854571414044016670>");
       });
+
+            if(today< subscriptionExpiryDate)
+      {
+        schedule.scheduleJob("18 11 * * *",function(): void{
+          let start = moment(today);
+          let end = moment(subscriptionExpiryDate);
+          let diff = end.diff(start,"days");
+          myServerChannel.send(`Bello handsomes 🐱‍🚀 Your Nitro Booster left **${diff} days**.... Have a nice day Sir!`);
+        });
+      }
     }
   });
 };
