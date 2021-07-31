@@ -1,6 +1,10 @@
 import { Message, User, Client } from "discord.js";
 import config from "../config";
 import commandHandler from "../commands";
+import greeting from "../response/greeting";
+import axios from "axios";
+
+const jokeAPI: string = "https://v2.jokeapi.dev/joke/Any?type=single";
 
 export default (bot: Client): void => {
   bot.on("message", (message: Message): void => {
@@ -19,8 +23,21 @@ export default (bot: Client): void => {
     }
 
     //
-    if (messageLower == "hi") {
-      message.channel.send("hey");
+    for(let i in greeting)
+    {
+      if (messageLower == greeting[i]) {
+        let randomIndex:number = Math.floor(Math.random() * greeting.greeting.length);
+        let mentionUser:string = Math.random()>=0.5 ? `<@!${message.author.id}>` : "";
+        message.channel.send(`${mentionUser} ${greeting[randomIndex]}`);
+      }
+    }
+
+    if(messageLower == "tell me a joke"){
+        let randomIndex:number = Math.floor(Math.random() * greeting.emoji.length);
+        axios.get(jokeAPI)
+        .then((response)=>{
+          message.channel.send(`<@!${message.author.id}> ${greeting.emoji[randomIndex]}  \`\`\`${response['data'].joke}\`\`\``);
+        })
     }
 
     if (messageLower == "test") {
