@@ -20,7 +20,7 @@ export default function poll(poll: string, message: Message, user: User): void {
       .then(function (message: Message) {
         message.react("👍");
         message.react("👎");
-        message.react(":nerd:");
+        message.react("🤓");
         message.channel.stopTyping();
       })
       .catch(function (error) {
