@@ -1,4 +1,6 @@
 import { Message, User, Client } from "discord.js";
+import config from "../config";
+import commandHandler from "../commands";
 
 export default (bot: Client): void => {
   bot.on("message", (message: Message): void => {
@@ -11,6 +13,10 @@ export default (bot: Client): void => {
     // Get author instance
     const author: User = message.author;
     console.log(`${author.username}: ${messageLower}`);
+
+    if (messageLower.startsWith(config.prefix)) {
+      return commandHandler(message, messageLower, author);
+    }
 
     //
     if (messageLower == "hi") {
