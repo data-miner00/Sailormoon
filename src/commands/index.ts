@@ -10,6 +10,8 @@ export default function commandHandler(
   const command: string = tokenizedString.splice(0, 1)[0].slice(1);
   const args: string = tokenizedString.join(" ");
   // messageObj.channel.send(`Your command is ${command}`);
+
+  // Register each command module below
   switch (command) {
     case "poll":
       poll(args, message, user);
