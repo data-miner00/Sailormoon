@@ -3,7 +3,7 @@ const greeting : string[] = [
     'hi',
     'hello',
     'bello',
-    'koniciwa',
+    'konnichiwa',
     'hey',
     '你好',
     'ni hao',
@@ -12,6 +12,9 @@ const greeting : string[] = [
     '嘿',
     'wassup',
     'yo',
+    'bonjour',
+    'ola',
+    'anyoung haseyo'
 ];
 
 //@ts-ignore
