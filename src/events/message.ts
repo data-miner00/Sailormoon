@@ -1,8 +1,8 @@
 import { Message, User, Client } from "discord.js";
 import config from "../config";
 import commandHandler from "../commands";
-import greeting from "../response/greeting";
 import axios from "axios";
+import greeting from "../response/greeting";
 
 const jokeAPI: string = "https://v2.jokeapi.dev/joke/Any?type=single";
 
