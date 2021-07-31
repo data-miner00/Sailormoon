@@ -10,6 +10,8 @@ Initial folder structure
 Sailormoon
 ┬
 └-- src
+│   └-- commands
+│   │    └-- index.ts
 │   └-- events
 │   │    └-- index.ts
 │   │    └-- message.ts
@@ -23,6 +25,7 @@ Sailormoon
 └-- package.json
 └-- Procfile
 └-- README.md
+└-- tsconfig.json
 ```
 
 ## Scripts
