@@ -40,6 +40,15 @@ export default (bot: Client): void => {
         })
     }
 
+    if(messageLower == "covid"){
+      axios.get("https://api.apify.com/v2/key-value-stores/6t65lJVfs3d8s6aKc/records/LATEST?disableRedirect=true")
+      .then((response)=>{
+        message.channel.send(`
+        \`\`\`🤧 Total Malaysia Cases 🤧 \n\nTotal Tested Positive: ${response['data'].testedPositive},\nTotal Recovered: ${response['data'].recovered},\nTotal Active Cases : ${response['data'].activeCases},\nICU : ${response['data'].inICU},\nDeceased: ${response['data'].deceased},\nUpdated: ${response['data'].lastUpdatedAtSource}\n\nPlease take care and stay safe 😁.\`\`\`
+        `)
+      })
+    }
+
     if (messageLower == "test") {
       message.channel.send(`<@!${message.author.id}>`);
     }
