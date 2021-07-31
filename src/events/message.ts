@@ -32,7 +32,7 @@ export default (bot: Client): void => {
       }
     }
 
-    if(messageLower == "tell me a joke"){
+    if(messageLower.includes("joke")){
         let randomIndex:number = Math.floor(Math.random() * greeting.emoji.length);
         axios.get(jokeAPI)
         .then((response)=>{
@@ -40,7 +40,7 @@ export default (bot: Client): void => {
         })
     }
 
-    if(messageLower == "covid"){
+    if(messageLower.includes("covid")){
       axios.get("https://api.apify.com/v2/key-value-stores/6t65lJVfs3d8s6aKc/records/LATEST?disableRedirect=true")
       .then((response)=>{
         message.channel.send(`
