@@ -23,15 +23,13 @@ export default (bot: Client): void => {
     }
 
     //
-    for (let i in greeting) {
-      if (messageLower == greeting[i]) {
-        let randomIndex: number = Math.floor(
-          Math.random() * greeting.greeting.length
-        );
-        let mentionUser: string =
-          Math.random() >= 0.5 ? `<@!${message.author.id}>` : "";
-        message.channel.send(`${mentionUser} ${greeting[randomIndex]}`);
-      }
+    if (messageLower in greeting.greeting) {
+      let randomIndex: number = Math.floor(
+        Math.random() * greeting.greeting.length
+      );
+      let mentionUser: string =
+        Math.random() >= 0.5 ? `<@!${message.author.id}>` : "";
+      message.channel.send(`${mentionUser} ${greeting[randomIndex]}`);
     }
 
     if (messageLower.includes("joke")) {
