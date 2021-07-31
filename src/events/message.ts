@@ -23,13 +23,14 @@ export default (bot: Client): void => {
     }
 
     //
-    if (messageLower in greeting.greeting) {
+    if (greeting.greeting.includes(messageLower)) {
       let randomIndex: number = Math.floor(
         Math.random() * greeting.greeting.length
       );
+      console.log(randomIndex);
       let mentionUser: string =
         Math.random() >= 0.5 ? `<@!${message.author.id}>` : "";
-      message.channel.send(`${mentionUser} ${greeting[randomIndex]}`);
+      message.channel.send(`${mentionUser} ${greeting.greeting[randomIndex]}`);
     }
 
     if (messageLower.includes("joke")) {
