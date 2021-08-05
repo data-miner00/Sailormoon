@@ -3,7 +3,15 @@ import config from "../config";
 import commandHandler from "../commands";
 import axios from "axios";
 import greeting from "../response/greeting";
+import * as dotenv from "dotenv";
+dotenv.config();
 
+const X_RAPIDAPI_KEY= process.env.X_RAPIDAPI_KEY;
+const DADJOKE_HOST=process.env.DADJOKE_HOST;
+const JOKEAPI_HOST = process.env.JOKEAPI_HOST;
+
+const hazDadJokeOptions: string = "https://icanhazdadjoke.com";
+const appSpotAPI: string = "https://official-joke-api.appspot.com/random_joke";
 const jokeAPI: string = "https://v2.jokeapi.dev/joke/Any?type=single";
 
 export default (bot: Client): void => {
@@ -46,18 +54,56 @@ export default (bot: Client): void => {
       let randomIndex: number = Math.floor(
         Math.random() * greeting.emoji.length
       );
-      axios.get(jokeAPI).then((response) => {
-        message.channel
-          .send(
-            `<@!${message.author.id}> ${greeting.emoji[randomIndex]}  \`\`\`${response["data"].joke}\`\`\``
-          )
-          .then(function (_: Message): void {
-            message.channel.stopTyping();
-          });
-      });
+      let emojiSelected: string = greeting.emoji[randomIndex];
+        switch(true)
+        {
+          case (randomIndex<=22):
+            let dadOptions: any = {
+              method: 'GET',
+              url: 'https://dad-jokes.p.rapidapi.com/random/joke/png',
+              headers: {
+                'x-rapidapi-key': X_RAPIDAPI_KEY,
+                'x-rapidapi-host': DADJOKE_HOST
+              }
+            };
+    
+            axios.request(dadOptions).then((response) => 
+              jokewithSetup(message,emojiSelected,response["data"].body.setup,response["data"].body.punchline)
+            );
+            break;
+
+          case (randomIndex<=44):
+            let jokeOptions: any = {
+              method: 'GET',
+              url: 'https://jokeapi-v2.p.rapidapi.com/joke/Any',
+              params: {
+                format: 'json',
+              },
+              headers: {
+                'x-rapidapi-key': X_RAPIDAPI_KEY,
+                'x-rapidapi-host': JOKEAPI_HOST
+              }
+            }
+            axios.request(jokeOptions).then((response) => 
+              jokewithSetup(message,emojiSelected,response["data"].setup,response["data"].delivery)
+            );
+            break;
+          
+          case (randomIndex<=66):
+            axios.get(jokeAPI).then((response)=>
+              jokewithoutSetup(message,emojiSelected,response["data"].joke)
+            );
+            break;
+          
+          default:
+            axios.get(appSpotAPI).then((response)=>
+              jokewithSetup(message,emojiSelected,response["data"].setup,response["data"].punchline)
+            );
+            break;
+        }
     }
 
-    if (messageLower.includes("covid")) {
+    if (messageLower.includes("malaysia covid case")) {
       message.channel.startTyping();
       axios
         .get(
@@ -103,4 +149,27 @@ export default (bot: Client): void => {
       message.channel.send(`<@!${message.author.id}> you are the best :)`);
     }
   });
+
+  const jokewithSetup = (message: Message,emoji:string, setup: string, punchLine: string): void => {
+      message.channel
+      .send(
+        `<@!${message.author.id}> ${emoji}\n**Setup**  \`\`\`${setup}\`\`\`\n**Punchline** \`\`\`${punchLine}\`\`\``
+      )
+      .then(function (_: Message): void {
+        message.channel.stopTyping();
+      });
+  }
+
+  const jokewithoutSetup = (message: Message,emoji:string, contents:string): void => {
+    message.channel
+    .send(
+      `<@!${message.author.id}> ${emoji}\n \`\`\`${contents}\`\`\``
+    )
+    .then(function (_: Message): void {
+      message.channel.stopTyping();
+    });
+}
+
+
+
 };
