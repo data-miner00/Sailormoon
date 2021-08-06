@@ -2,12 +2,6 @@
 
 Sailormoon is a Discord bot made with Discord.js API that serves to remind friends upon Discord Nitro expiry.
 
-## Env Var
-X_RAPIDAPI_KEY=ea1222293cmshe64912dcf8bbcf5p18e86cjsn1ea18eb5844c
-DADJOKE_HOST=dad-jokes.p.rapidapi.com
-JOKEAPI_HOST=jokeapi-v2.p.rapidapi.com
-
-
 ## Folder structure
 
 Initial folder structure
