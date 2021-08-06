@@ -6,8 +6,8 @@ import greeting from "../response/greeting";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const X_RAPIDAPI_KEY= process.env.X_RAPIDAPI_KEY;
-const DADJOKE_HOST=process.env.DADJOKE_HOST;
+const X_RAPIDAPI_KEY = process.env.X_RAPIDAPI_KEY;
+const DADJOKE_HOST = process.env.DADJOKE_HOST;
 const JOKEAPI_HOST = process.env.JOKEAPI_HOST;
 
 const hazDadJokeOptions: string = "https://icanhazdadjoke.com";
@@ -55,52 +55,74 @@ export default (bot: Client): void => {
         Math.random() * greeting.emoji.length
       );
       let emojiSelected: string = greeting.emoji[randomIndex];
-        switch(true)
-        {
-          case (randomIndex<=22):
-            let dadOptions: any = {
-              method: 'GET',
-              url: 'https://dad-jokes.p.rapidapi.com/random/joke/png',
-              headers: {
-                'x-rapidapi-key': X_RAPIDAPI_KEY,
-                'x-rapidapi-host': DADJOKE_HOST
-              }
-            };
-    
-            axios.request(dadOptions).then((response) => 
-              jokewithSetup(message,emojiSelected,response["data"].body.setup,response["data"].body.punchline)
-            );
-            break;
+      switch (true) {
+        case randomIndex <= 22:
+          let dadOptions: any = {
+            method: "GET",
+            url: "https://dad-jokes.p.rapidapi.com/random/joke/png",
+            headers: {
+              "x-rapidapi-key": X_RAPIDAPI_KEY,
+              "x-rapidapi-host": DADJOKE_HOST,
+            },
+          };
 
-          case (randomIndex<=44):
-            let jokeOptions: any = {
-              method: 'GET',
-              url: 'https://jokeapi-v2.p.rapidapi.com/joke/Any',
-              params: {
-                format: 'json',
-              },
-              headers: {
-                'x-rapidapi-key': X_RAPIDAPI_KEY,
-                'x-rapidapi-host': JOKEAPI_HOST
-              }
-            }
-            axios.request(jokeOptions).then((response) => 
-              jokewithSetup(message,emojiSelected,response["data"].setup,response["data"].delivery)
+          axios
+            .request(dadOptions)
+            .then((response) =>
+              jokewithSetup(
+                message,
+                emojiSelected,
+                response["data"].body.setup,
+                response["data"].body.punchline
+              )
             );
-            break;
-          
-          case (randomIndex<=66):
-            axios.get(jokeAPI).then((response)=>
-              jokewithoutSetup(message,emojiSelected,response["data"].joke)
+          break;
+
+        case randomIndex <= 44:
+          let jokeOptions: any = {
+            method: "GET",
+            url: "https://jokeapi-v2.p.rapidapi.com/joke/Any",
+            params: {
+              format: "json",
+            },
+            headers: {
+              "x-rapidapi-key": X_RAPIDAPI_KEY,
+              "x-rapidapi-host": JOKEAPI_HOST,
+            },
+          };
+          axios
+            .request(jokeOptions)
+            .then((response) =>
+              jokewithSetup(
+                message,
+                emojiSelected,
+                response["data"].setup,
+                response["data"].delivery
+              )
             );
-            break;
-          
-          default:
-            axios.get(appSpotAPI).then((response)=>
-              jokewithSetup(message,emojiSelected,response["data"].setup,response["data"].punchline)
+          break;
+
+        case randomIndex <= 66:
+          axios
+            .get(jokeAPI)
+            .then((response) =>
+              jokewithoutSetup(message, emojiSelected, response["data"].joke)
             );
-            break;
-        }
+          break;
+
+        default:
+          axios
+            .get(appSpotAPI)
+            .then((response) =>
+              jokewithSetup(
+                message,
+                emojiSelected,
+                response["data"].setup,
+                response["data"].punchline
+              )
+            );
+          break;
+      }
     }
 
     if (messageLower.includes("malaysia covid case")) {
@@ -122,23 +144,19 @@ export default (bot: Client): void => {
         });
     }
 
-    if (messageLower.includes("bored") || messageLower.includes("boring") ) {
+    if (messageLower.includes("bored") || messageLower.includes("boring")) {
       message.channel.startTyping();
-      axios
-        .get(
-          "https://www.boredapi.com/api/activity/"
-        )
-        .then((response) => {
-          message.channel
-            .send(
-              `Hi <@!${message.author.id}>! Do this Task 😎
-        \`\`\`Activity: ${response['data'].activity}\nType: ${response['data'].type}\nParticipants: ${response['data'].participants}\nLinks: ${response['data'].link}\`\`\`
+      axios.get("https://www.boredapi.com/api/activity/").then((response) => {
+        message.channel
+          .send(
+            `Hi <@!${message.author.id}>! Do this Task 😎
+        \`\`\`Activity: ${response["data"].activity}\nType: ${response["data"].type}\nParticipants: ${response["data"].participants}\nLinks: ${response["data"].link}\`\`\`
         `
-            )
-            .then((_: Message): void => {
-              message.channel.stopTyping();
-            });
-        });
+          )
+          .then((_: Message): void => {
+            message.channel.stopTyping();
+          });
+      });
     }
 
     if (messageLower == "test") {
@@ -150,26 +168,30 @@ export default (bot: Client): void => {
     }
   });
 
-  const jokewithSetup = (message: Message,emoji:string, setup: string, punchLine: string): void => {
-      message.channel
+  const jokewithSetup = (
+    message: Message,
+    emoji: string,
+    setup: string,
+    punchLine: string
+  ): void => {
+    message.channel
       .send(
         `<@!${message.author.id}> ${emoji}\n**Setup**  \`\`\`${setup}\`\`\`\n**Punchline** \`\`\`${punchLine}\`\`\``
       )
       .then(function (_: Message): void {
         message.channel.stopTyping();
       });
-  }
+  };
 
-  const jokewithoutSetup = (message: Message,emoji:string, contents:string): void => {
+  const jokewithoutSetup = (
+    message: Message,
+    emoji: string,
+    contents: string
+  ): void => {
     message.channel
-    .send(
-      `<@!${message.author.id}> ${emoji}\n \`\`\`${contents}\`\`\``
-    )
-    .then(function (_: Message): void {
-      message.channel.stopTyping();
-    });
-}
-
-
-
+      .send(`<@!${message.author.id}> ${emoji}\n \`\`\`${contents}\`\`\``)
+      .then(function (_: Message): void {
+        message.channel.stopTyping();
+      });
+  };
 };
