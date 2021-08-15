@@ -1,5 +1,6 @@
 import { Message, User } from "discord.js";
 import poll from "./poll";
+import bored from "./bored";
 
 export default function commandHandler(
   message: Message,
@@ -15,6 +16,10 @@ export default function commandHandler(
   switch (command) {
     case "poll":
       poll(args, message, user);
+      break;
+    case "bored":
+    case "boring":
+      bored(message);
       break;
     default:
       message.channel.send("404");

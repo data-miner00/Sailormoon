@@ -1,16 +1,27 @@
 import { Client, TextChannel } from "discord.js";
 import * as schedule from "node-schedule";
 import * as moment from "moment";
-import config from "../config";
+import activityGenerator from "../helpers/activityGenerator";
+import { Activity } from "../models/Activity";
 
 export default (bot: Client): void => {
+  const activityIterator = activityGenerator();
+
   bot.on("ready", (): void => {
-    bot.user.setActivity(config.activity.game).catch(console.error);
     console.log("I'm ready!");
 
     const subscriptionExpiryDate: Date = new Date(
       "September 14, 2021 03:24:00"
     );
+
+    schedule.scheduleJob("0 0 0 * * *", function (): void {
+      const activity: Activity | void = activityIterator.next().value;
+
+      if (activity)
+        bot.user
+          .setActivity(activity.what, { type: activity.how })
+          .catch(console.error);
+    });
 
     // JC Server fellows
     const jcServerChannel: TextChannel = bot.channels.cache.get(

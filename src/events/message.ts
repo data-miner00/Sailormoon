@@ -144,21 +144,6 @@ export default (bot: Client): void => {
         });
     }
 
-    if (messageLower.includes("bored") || messageLower.includes("boring")) {
-      message.channel.startTyping();
-      axios.get("https://www.boredapi.com/api/activity/").then((response) => {
-        message.channel
-          .send(
-            `Hi <@!${message.author.id}>! Do this Task 😎
-        \`\`\`Activity: ${response["data"].activity}\nType: ${response["data"].type}\nParticipants: ${response["data"].participants}\nLinks: ${response["data"].link}\`\`\`
-        `
-          )
-          .then((_: Message): void => {
-            message.channel.stopTyping();
-          });
-      });
-    }
-
     if (messageLower == "test") {
       message.channel.send(`<@!${message.author.id}>`);
     }
