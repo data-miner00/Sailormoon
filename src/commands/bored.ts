@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Message, User } from "discord.js";
+import { Message } from "discord.js";
 
 export default function bored(message: Message): void {
   message.channel.startTyping();
