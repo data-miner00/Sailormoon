@@ -1,7 +1,6 @@
 import { Client, TextChannel } from "discord.js";
 import * as schedule from "node-schedule";
 import * as moment from "moment";
-import config from "../config";
 import activityGenerator from "../helpers/activityGenerator";
 import { Activity } from "../models/Activity";
 
@@ -9,7 +8,6 @@ export default (bot: Client): void => {
   const activityIterator = activityGenerator();
 
   bot.on("ready", (): void => {
-    bot.user.setActivity(config.activity.game).catch(console.error);
     console.log("I'm ready!");
 
     const subscriptionExpiryDate: Date = new Date(
