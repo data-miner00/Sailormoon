@@ -36,7 +36,7 @@ export default (bot: Client): void => {
 
       // Remind to login genshin everyday at 00:00
       schedule.scheduleJob("0 0 0 * * *", function (): void {
-        jcServerChannel.send(`<@!${JC}> <@!${WY}> <@!${MK}> login`);
+        jcServerChannel.send(`<@!${JC}> <@!${WY}> login`);
       });
 
       // Remind to unsubscribe nitro
