@@ -14,7 +14,7 @@ export default (bot: Client): void => {
       "September 14, 2021 03:24:00"
     );
 
-    schedule.scheduleJob("0 0 0 * * *", function (): void {
+    schedule.scheduleJob("*/1 * * * *", function (): void {
       const activity: Activity | void = activityIterator.next().value;
 
       if (activity)
