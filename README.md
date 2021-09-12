@@ -45,4 +45,6 @@ npm run build
 ## Todos
 
 - [ ] Appointment meeting feature (people react will get notification)
-- [ ] ...
+- [ ] Using Databases
+- [ ] Music?
+- [ ]
