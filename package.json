@@ -4,9 +4,9 @@
   "description": "A utiility and minimal discord bot :)",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/app.js",
+    "start": "node dist/Program.js",
     "postinstall": "tsc",
-    "dev": "nodemon src/app.ts"
+    "dev": "nodemon src/Program.ts"
   },
   "keywords": [],
   "author": "Dunlop",
