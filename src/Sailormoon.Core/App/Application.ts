@@ -7,8 +7,7 @@ export default class Application {
     public static getAppInstance(): Application {
         if (!Application.instance) {
             const bot: Client = new Client();
-            this.instance = new Application(bot);
-            return Application.instance;
+            Application.instance = new Application(bot);
         }
 
         return Application.instance;
