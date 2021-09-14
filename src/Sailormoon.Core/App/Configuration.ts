@@ -1,21 +1,23 @@
 import EnvLoader from "../Utility/EnvLoader";
 
 export default class Configuration {
-    #_commandPrefix: string;
-    #_discordToken: string;
+    #commandPrefix: string;
+    #discordToken: string;
 
     constructor() {
-        EnvLoader.loadEnv();
+        if (!process.env.DISCORD_API_TOKEN) {
+            EnvLoader.loadEnv();
+        }
 
-        this.#_commandPrefix = "?";
-        this.#_discordToken = process.env.DISCORD_API_TOKEN;
+        this.#commandPrefix = "?";
+        this.#discordToken = process.env.DISCORD_API_TOKEN;
     }
 
-    get commandPrefix(): string {
-        return this.#_commandPrefix;
+    public get commandPrefix(): string {
+        return this.#commandPrefix;
     }
 
-    get discordToken(): string {
-        return this.#_discordToken;
+    public get discordToken(): string {
+        return this.#discordToken;
     }
 }
