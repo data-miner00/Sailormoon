@@ -26,7 +26,7 @@ export default class PollCommand extends Command implements ICallbackable {
         this.#commandEmbed
             .setTitle(this.commandObj.arguments.join(" "))
             .setColor("RANDOM")
-            .setFooter("Powered by Abstract Algebra 🚒")
+            .setFooter("Powered by Zoo Melaka 🚒")
             .setAuthor(this.#author.username, this.#author.avatarURL());
     }
 
