@@ -1,4 +1,4 @@
-import EnvLoader from "../Utility/EnvLoader";
+import EnvHelper from "../Utility/EnvHelper";
 
 export default class Configuration {
     #commandPrefix: string;
@@ -12,13 +12,11 @@ export default class Configuration {
     private static instance: Configuration;
 
     private constructor() {
-        if (!process.env.DISCORD_API_TOKEN) {
-            EnvLoader.loadEnv();
-        }
+        EnvHelper.loadEnv();
 
         this.#commandPrefix = "?";
-        this.#discordToken = process.env.DISCORD_API_TOKEN;
-        this.#xrapidApiKey = process.env.X_RAPIDAPI_KEY;
+        this.#discordToken = EnvHelper.queryEnv("discord");
+        this.#xrapidApiKey = EnvHelper.queryEnv("rapidapi");
         this.#boredApiUrl = "https://www.boredapi.com/api/activity/";
         this.#dadjokeHost = "dad-jokes.p.rapidapi.com";
         this.#jokeApiHost = "jokeapi-v2.p.rapidapi.com";
