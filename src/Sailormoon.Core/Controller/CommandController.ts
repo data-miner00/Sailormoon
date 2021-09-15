@@ -36,12 +36,14 @@ export default class CommandController {
                     this.#channel,
                     this.#author
                 );
+                break;
             case "bored":
                 command = new BoredCommand(
                     this.#commandObj,
                     this.#channel,
                     this.#author
                 );
+                break;
             default:
                 console.log("No such command");
         }
