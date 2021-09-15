@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 
 export default class EnvLoader {
     public static isEnvLoaded(): boolean {
-        return this.queryEnv("discord") !== null;
+        return this.queryEnv("discord") === null;
     }
 
     public static loadEnv(): void {
