@@ -1,7 +1,7 @@
-import Message from "./Sailormoon.Core/Event/Message";
+import Message from "./Sailormoon.Core/Event/MessageEvent";
 import Application from "./Sailormoon.Core/App/Application";
 import Configuration from "./Sailormoon.Core/App/Configuration";
-import Ready from "./Sailormoon.Core/Event/Ready";
+import Ready from "./Sailormoon.Core/Event/ReadyEvent";
 
 class Program {
     public static Main(): void {

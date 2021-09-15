@@ -4,7 +4,7 @@ import Application from "../App/Application";
 import { Client } from "discord.js";
 import ActivityType from "./ActivityType";
 
-export default class Ready implements IEvent {
+export default class ReadyEvent implements IEvent {
     eventType: EventType;
 
     callback: Function;
