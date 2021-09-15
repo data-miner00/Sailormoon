@@ -9,7 +9,9 @@ export default class Configuration {
     #xrapidApiKey: string;
     #msiaCovidApiUrl: string;
 
-    constructor() {
+    private static instance: Configuration;
+
+    private constructor() {
         if (!process.env.DISCORD_API_TOKEN) {
             EnvLoader.loadEnv();
         }
@@ -22,6 +24,13 @@ export default class Configuration {
         this.#jokeApiHost = "jokeapi-v2.p.rapidapi.com";
         this.#msiaCovidApiUrl =
             "https://api.apify.com/v2/key-value-stores/6t65lJVfs3d8s6aKc/records/LATEST?disableRedirect=true";
+    }
+
+    public static getInstance(): Configuration {
+        if (!Configuration.instance) {
+            Configuration.instance = new Configuration();
+        }
+        return Configuration.instance;
     }
 
     public get commandPrefix(): string {

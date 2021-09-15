@@ -5,7 +5,7 @@ import Ready from "./Sailormoon.Core/Event/ReadyEvent";
 
 class Program {
     public static Main(): void {
-        const configuration: Configuration = new Configuration();
+        const configuration: Configuration = Configuration.getInstance();
         const application: Application = Application.getAppInstance();
 
         application.registerEvent(new Ready());

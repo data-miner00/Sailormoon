@@ -24,7 +24,7 @@ export default class BoredCommand extends Command {
     }
 
     protected async setup(): Promise<void> {
-        const configuration: Configuration = new Configuration();
+        const configuration: Configuration = Configuration.getInstance();
         const { data } = await axios.get(configuration.boredApiUrl);
 
         this.#replyMessage = `Hi <@!${this.#author.id}>! Do this Task 😎
