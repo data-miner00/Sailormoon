@@ -3,7 +3,7 @@ import Configuration from "../App/Configuration";
 import CommandObject from "../Command/CommandObject";
 
 export default class GeneralUtils {
-    private static configuration: Configuration = new Configuration();
+    private static configuration: Configuration = Configuration.getInstance();
 
     public static isBot(user: User): boolean {
         return user.bot;
@@ -15,8 +15,7 @@ export default class GeneralUtils {
 
     public static preprocessCommand(message: Message): CommandObject {
         const args: string[] = message.content.split(" ");
-        const command: string = args.splice(0)[0].slice(1);
-
-        return new CommandObject(command, args);
+        const command: string = args[0].slice(1);
+        return new CommandObject(command, args.slice(1));
     }
 }
