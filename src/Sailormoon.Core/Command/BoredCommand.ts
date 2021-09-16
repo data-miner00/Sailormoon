@@ -6,6 +6,8 @@ import Command from "./Command";
 import CommandObject from "./CommandObject";
 
 export default class BoredCommand extends Command {
+    private static boredApiUrl: string =
+        "https://www.boredapi.com/api/activity/";
     protected commandObj: CommandObject;
     #author: User;
     #channel: AllChannel;
@@ -24,8 +26,7 @@ export default class BoredCommand extends Command {
     }
 
     protected async setup(): Promise<void> {
-        const configuration: Configuration = Configuration.getInstance();
-        const { data } = await axios.get(configuration.boredApiUrl);
+        const { data } = await axios.get(BoredCommand.boredApiUrl);
 
         this.#replyMessage = `Hi <@!${this.#author.id}>! Do this Task 😎
         \`\`\`Activity: ${data.activity}\nType: ${data.type}\nParticipants: ${
