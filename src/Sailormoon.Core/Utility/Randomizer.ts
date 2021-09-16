@@ -23,4 +23,10 @@ export default class Randomizer {
     ) {
         return Math.random() * endExcluding + startIncluding;
     }
+
+    public static RandomElement<T>(arr: T[]): T {
+        const length: number = arr.length;
+        const randomIndex: number = this.IntegerRandomizer(0, length);
+        return arr[randomIndex];
+    }
 }
