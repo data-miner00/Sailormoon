@@ -2,6 +2,7 @@ import { Message, User } from "discord.js";
 import BoredCommand from "../Command/BoredCommand";
 import Command from "../Command/Command";
 import CommandObject from "../Command/CommandObject";
+import MsiaCovidCommand from "../Command/MsiaCovidCommand";
 import PollCommand from "../Command/PollCommand";
 import AllChannel from "../Utility/AllChannel";
 import GeneralUtils from "../Utility/GeneralUtils";
@@ -43,6 +44,9 @@ export default class CommandController {
                     this.#channel,
                     this.#author
                 );
+                break;
+            case "covid":
+                command = new MsiaCovidCommand(this.#commandObj, this.#channel);
                 break;
             default:
                 console.log("No such command");
