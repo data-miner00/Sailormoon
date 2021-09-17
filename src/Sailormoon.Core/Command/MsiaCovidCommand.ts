@@ -4,7 +4,7 @@ import Command from "./Command";
 export default class MsiaCovidCommand extends Command {
     public commandSignature: string = "covid";
 
-    private static msiaCovidApiUrl: string =
+    private static readonly msiaCovidApiUrl: string =
         "https://api.apify.com/v2/key-value-stores/6t65lJVfs3d8s6aKc/records/LATEST?disableRedirect=true";
 
     #replyMessage: string;
