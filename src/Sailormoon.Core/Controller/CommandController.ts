@@ -1,56 +1,42 @@
-import { Message, User } from "discord.js";
+import { Message } from "discord.js";
 import BoredCommand from "../Command/BoredCommand";
 import Command from "../Command/Command";
-import CommandObject from "../Command/CommandObject";
 import MsiaCovidCommand from "../Command/MsiaCovidCommand";
 import PollCommand from "../Command/PollCommand";
-import AllChannel from "../Utility/AllChannel";
 import GeneralUtils from "../Utility/GeneralUtils";
 
 export default class CommandController {
-    #commandObj: CommandObject;
     #message: Message;
-    #author: User;
-    #channel: AllChannel;
-    #command: Command;
+
+    private commands: Array<Command>;
 
     constructor(message: Message) {
         this.#message = message;
-        this.#commandObj = GeneralUtils.preprocessCommand(message);
-        this.#author = message.author;
-        this.#channel = message.channel;
-        this.#command = this.searchCommand(this.#commandObj.command);
+        this.commands = [];
 
-        this.invokeCommand();
+        this.registerCommands();
+        this.sendResponse();
     }
 
-    private invokeCommand(): void {
-        this.#command.execute();
+    private registerCommands(): void {
+        this.registerCommand(new PollCommand(this.#message));
+        this.registerCommand(new BoredCommand(this.#message));
+        this.registerCommand(new MsiaCovidCommand(this.#message));
     }
 
-    private searchCommand(commandSignature: string): Command {
-        let command: Command;
-        switch (commandSignature) {
-            case "poll":
-                command = new PollCommand(
-                    this.#commandObj,
-                    this.#channel,
-                    this.#author
-                );
-                break;
-            case "bored":
-                command = new BoredCommand(
-                    this.#commandObj,
-                    this.#channel,
-                    this.#author
-                );
-                break;
-            case "covid":
-                command = new MsiaCovidCommand(this.#commandObj, this.#channel);
-                break;
-            default:
-                console.log("No such command");
-        }
-        return command;
+    private registerCommand(command: Command): void {
+        this.commands.push(command);
+    }
+
+    private sendResponse(): void {
+        this.commands.every((command: Command): boolean => {
+            const commandSignature: string =
+                GeneralUtils.extractCommandSignature(this.#message);
+            if (command.commandSignature == commandSignature) {
+                command.execute();
+                return false;
+            }
+            return true;
+        });
     }
 }

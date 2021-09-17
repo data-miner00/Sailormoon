@@ -1,7 +1,13 @@
-import CommandObject from "./CommandObject";
+import { Message } from "discord.js";
 
 export default abstract class Command {
-    protected abstract commandObj: CommandObject;
+    public abstract commandSignature: string;
+
+    protected message: Message;
+
+    public constructor(message: Message) {
+        this.message = message;
+    }
 
     public abstract execute(): void;
 
