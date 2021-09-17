@@ -1,24 +1,4 @@
-
-const greeting : string[] = [
-    'hi',
-    'hello',
-    'bello',
-    'konnichiwa',
-    'hey',
-    '你好',
-    'ni hao',
-    'hei',
-    'hihi',
-    '嘿',
-    'wassup',
-    'yo',
-    'bonjour',
-    'ola',
-    'anyoung haseyo'
-];
-
-//@ts-ignore
-const emoji: string[] = [
+export default [
     "🤗",
     "😃",
     "😄",
@@ -109,5 +89,3 @@ const emoji: string[] = [
     "🤑",
     "🤠",
 ];
-
-export default {greeting,emoji}

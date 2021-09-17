@@ -41,3 +41,12 @@ npm run dev
 ```
 npm run build
 ```
+
+## Todos
+
+- [ ] Appointment meeting feature (people react will get notification)
+- [ ] Using Databases
+- [ ] Music?
+- [ ] Better Polling
+- [ ] Update folder structure
+- [ ] ...
