@@ -1,5 +1,5 @@
 import { Message } from "discord.js";
-import AllResponse from "./AllResponse";
+import AllResponse from "../Utility/AllResponse";
 
 export default abstract class MessageHandler {
     protected response: AllResponse;
