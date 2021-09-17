@@ -18,4 +18,8 @@ export default class GeneralUtils {
         const command: string = args[0].slice(1);
         return new CommandObject(command, args.slice(1));
     }
+
+    public static extractCommandSignature(message: Message): string {
+        return message.content.split(" ")[0].slice(1) || "";
+    }
 }
