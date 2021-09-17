@@ -7,6 +7,6 @@ export default class TestMessageHandler extends MessageHandler {
 
     public execute(): void {
         this.response = "you have typed test in the chat";
-        this.channel.send(this.response);
+        this.message.channel.send(this.response);
     }
 }

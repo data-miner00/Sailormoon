@@ -6,16 +6,12 @@ import TestMessageHandler from "../Utility/TestMessageHandler";
 
 export default class MessageController {
     #message: Message;
-    #author: User;
-    #channel: AllChannel;
-    #response: string;
 
     private messageHandlers: Array<MessageHandler>;
 
     constructor(message: Message) {
         this.#message = message;
-        this.#author = message.author;
-        this.#channel = message.channel;
+        this.messageHandlers = [];
 
         this.registerMessageHandlers();
 
@@ -23,12 +19,8 @@ export default class MessageController {
     }
 
     private registerMessageHandlers(): void {
-        this.registerMessageHandler(
-            new TestMessageHandler(this.#message, this.#channel)
-        );
-        this.registerMessageHandler(
-            new GreetingMessageHandler(this.#message, this.#channel)
-        );
+        this.registerMessageHandler(new TestMessageHandler(this.#message));
+        this.registerMessageHandler(new GreetingMessageHandler(this.#message));
     }
 
     private registerMessageHandler(messageHandler: MessageHandler): void {
