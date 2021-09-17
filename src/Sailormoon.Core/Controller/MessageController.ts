@@ -27,11 +27,14 @@ export default class MessageController {
     }
 
     private sendResponse(): void {
-        this.messageHandlers.forEach((messageHandler: MessageHandler): void => {
-            if (messageHandler.conditionChecker()) {
-                messageHandler.execute();
-                return;
+        this.messageHandlers.every(
+            (messageHandler: MessageHandler): boolean => {
+                if (messageHandler.conditionChecker()) {
+                    messageHandler.execute();
+                    return false;
+                }
+                return true;
             }
-        });
+        );
     }
 }
