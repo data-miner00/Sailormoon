@@ -3,13 +3,12 @@ import MessageHandler from "./MessageHandler";
 import Randomizer from "./Randomizer";
 
 export default class GreetingMessageHandler extends MessageHandler {
-    protected conditionChecker(message: string): boolean {
-        return GreetingsData.includes(message);
+    public conditionChecker(): boolean {
+        return GreetingsData.includes(this.message.content);
     }
-    protected responseGetter(): string {
-        return Randomizer.RandomElement(GreetingsData);
-    }
-    protected execute(): void {
+
+    public execute(): void {
+        this.response = Randomizer.RandomElement(GreetingsData);
         this.channel.send(this.response);
     }
 }

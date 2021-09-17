@@ -1,15 +1,12 @@
 import MessageHandler from "./MessageHandler";
 
 export default class TestMessageHandler extends MessageHandler {
-    protected conditionChecker(message: string): boolean {
-        return message == "test";
+    public conditionChecker(): boolean {
+        return this.message.content == "test";
     }
 
-    protected responseGetter(): string {
-        return "you have typed test in the chat";
-    }
-
-    protected execute(): void {
+    public execute(): void {
+        this.response = "you have typed test in the chat";
         this.channel.send(this.response);
     }
 }

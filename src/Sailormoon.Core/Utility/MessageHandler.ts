@@ -1,17 +1,16 @@
+import { Message } from "discord.js";
 import AllChannel from "./AllChannel";
+import AllResponse from "./AllResponse";
 
 export default abstract class MessageHandler {
     protected channel: AllChannel;
-    protected response: string;
-    protected abstract conditionChecker(message: string): boolean;
-    protected abstract responseGetter(): string;
-    protected abstract execute(): void;
+    protected response: AllResponse;
+    protected message: Message;
+    public abstract conditionChecker(): boolean;
+    public abstract execute(): void;
 
-    constructor(message: string, channel: AllChannel) {
+    constructor(message: Message, channel: AllChannel) {
         this.channel = channel;
-        if (this.conditionChecker(message)) {
-            this.response = this.responseGetter();
-            this.execute();
-        }
+        this.message = message;
     }
 }
