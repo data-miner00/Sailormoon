@@ -1,0 +1,17 @@
+export default [
+    "hi",
+    "hello",
+    "bello",
+    "konnichiwa",
+    "hey",
+    "你好",
+    "ni hao",
+    "hei",
+    "hihi",
+    "嘿",
+    "wassup",
+    "yo",
+    "bonjour",
+    "ola",
+    "anyoung haseyo",
+];
