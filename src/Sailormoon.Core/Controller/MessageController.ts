@@ -1,8 +1,7 @@
-import { Message, User } from "discord.js";
-import AllChannel from "../Utility/AllChannel";
-import GreetingMessageHandler from "../Utility/GreetingMessageHandler";
-import MessageHandler from "../Utility/MessageHandler";
-import TestMessageHandler from "../Utility/TestMessageHandler";
+import { Message } from "discord.js";
+import GreetingMessageHandler from "../MessageHandler/GreetingMessageHandler";
+import MessageHandler from "../MessageHandler/MessageHandler";
+import TestMessageHandler from "../MessageHandler/TestMessageHandler";
 
 export default class MessageController {
     #message: Message;

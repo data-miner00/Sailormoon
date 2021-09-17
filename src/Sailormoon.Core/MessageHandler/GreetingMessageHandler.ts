@@ -1,6 +1,6 @@
 import GreetingsData from "../Data/GreetingsData";
 import MessageHandler from "./MessageHandler";
-import Randomizer from "./Randomizer";
+import Randomizer from "../Utility/Randomizer";
 
 export default class GreetingMessageHandler extends MessageHandler {
     public conditionChecker(): boolean {
