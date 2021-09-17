@@ -1,40 +1,24 @@
-import { Message } from "discord.js";
 import GreetingMessageHandler from "../MessageHandler/GreetingMessageHandler";
 import MessageHandler from "../MessageHandler/MessageHandler";
+import NitroBoostMessageHandler from "../MessageHandler/NitroBoostMessageHandler";
 import TestMessageHandler from "../MessageHandler/TestMessageHandler";
+import Controller from "./Controller";
 
-export default class MessageController {
-    #message: Message;
-
-    private messageHandlers: Array<MessageHandler>;
-
-    constructor(message: Message) {
-        this.#message = message;
-        this.messageHandlers = [];
-
-        this.registerMessageHandlers();
-
-        this.sendResponse();
+export default class MessageController extends Controller<MessageHandler> {
+    // Register new message handler here with the following pattern
+    protected registerHandlers(): void {
+        this.registerHandler(new TestMessageHandler(this.message));
+        this.registerHandler(new GreetingMessageHandler(this.message));
+        this.registerHandler(new NitroBoostMessageHandler(this.message));
     }
 
-    private registerMessageHandlers(): void {
-        this.registerMessageHandler(new TestMessageHandler(this.#message));
-        this.registerMessageHandler(new GreetingMessageHandler(this.#message));
-    }
-
-    private registerMessageHandler(messageHandler: MessageHandler): void {
-        this.messageHandlers.push(messageHandler);
-    }
-
-    private sendResponse(): void {
-        this.messageHandlers.every(
-            (messageHandler: MessageHandler): boolean => {
-                if (messageHandler.conditionChecker()) {
-                    messageHandler.execute();
-                    return false;
-                }
-                return true;
+    protected sendResponse(): void {
+        this.handlers.every((messageHandler: MessageHandler): boolean => {
+            if (messageHandler.conditionChecker()) {
+                messageHandler.execute();
+                return false;
             }
-        );
+            return true;
+        });
     }
 }
