@@ -47,4 +47,6 @@ npm run build
 - [ ] Appointment meeting feature (people react will get notification)
 - [ ] Using Databases
 - [ ] Music?
-- [ ]
+- [ ] Better Polling
+- [ ] Update folder structure
+- [ ] ...
