@@ -4,7 +4,7 @@ import Command from "./Command";
 export default class BoredCommand extends Command {
     public commandSignature: string = "bored";
 
-    private static boredApiUrl: string =
+    private static readonly boredApiUrl: string =
         "https://www.boredapi.com/api/activity/";
 
     #replyMessage: string;
