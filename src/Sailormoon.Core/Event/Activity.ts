@@ -1,6 +1,6 @@
 import ActivityType from "./ActivityType";
 
-export default interface Activity {
-    method: ActivityType;
-    subject: string;
+export default class Activity {
+    how: ActivityType;
+    what: string;
 }
