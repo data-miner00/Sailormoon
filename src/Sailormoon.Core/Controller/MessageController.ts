@@ -2,6 +2,7 @@ import GreetingMessageHandler from "../MessageHandler/GreetingMessageHandler";
 import MessageHandler from "../MessageHandler/MessageHandler";
 import NitroBoostMessageHandler from "../MessageHandler/NitroBoostMessageHandler";
 import TestMessageHandler from "../MessageHandler/TestMessageHandler";
+import VulgarMessageHandler from "../MessageHandler/VulgarMessageHandler";
 import Controller from "./Controller";
 
 export default class MessageController extends Controller<MessageHandler> {
@@ -10,6 +11,7 @@ export default class MessageController extends Controller<MessageHandler> {
         this.registerHandler(new TestMessageHandler(this.message));
         this.registerHandler(new GreetingMessageHandler(this.message));
         this.registerHandler(new NitroBoostMessageHandler(this.message));
+        this.registerHandler(new VulgarMessageHandler(this.message));
     }
 
     protected sendResponse(): void {
