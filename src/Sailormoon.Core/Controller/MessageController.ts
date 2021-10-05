@@ -1,4 +1,3 @@
-import { threadId } from "worker_threads";
 import GreetingMessageHandler from "../MessageHandler/GreetingMessageHandler";
 import MessageHandler from "../MessageHandler/MessageHandler";
 import NitroBoostMessageHandler from "../MessageHandler/NitroBoostMessageHandler";
