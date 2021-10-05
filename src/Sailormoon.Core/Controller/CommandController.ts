@@ -1,6 +1,7 @@
 import BoredCommand from "../Command/BoredCommand";
 import Command from "../Command/Command";
 import JokeCommand from "../Command/JokeCommand";
+import LieDetectorCommand from "../Command/LieDetectorCommand";
 import MsiaCovidCommand from "../Command/MsiaCovidCommand";
 import PollCommand from "../Command/PollCommand";
 import GeneralUtils from "../Utility/GeneralUtils";
@@ -13,6 +14,7 @@ export default class CommandController extends Controller<Command> {
         this.registerHandler(new BoredCommand(this.message));
         this.registerHandler(new MsiaCovidCommand(this.message));
         this.registerHandler(new JokeCommand(this.message));
+        this.registerHandler(new LieDetectorCommand(this.message));
     }
 
     protected sendResponse(): void {
