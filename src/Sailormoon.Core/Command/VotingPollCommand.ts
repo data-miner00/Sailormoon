@@ -11,16 +11,36 @@ export default class VotingPollCommand
 {
     public commandSignature: string = "vote";
 
-    private commandObject: CommandObject = GeneralUtils.preprocessCommand(
-        this.message
-    );
+    private commandObject: CommandObject;
     private messageReply: string;
+
+    private pollTitle: string;
 
     public constructor(message: Message) {
         super(message);
+        this.CustomPreprocessCommand();
     }
 
-    private mapArgumentsToVotingString(args: string[]): string {
+    private CustomPreprocessCommand(): void {
+        // Remove ?vote
+        const rawStringContent = this.message.content.substring(
+            this.commandSignature.length + 1
+        );
+
+        // Split arguments into array of string
+        let args: string[] = rawStringContent.split(";");
+
+        // Trim arguments
+        args = args.map((arg) => arg.trim());
+
+        // Set the first arg to title and remove it from args
+        this.pollTitle = args.splice(0, 1)[0];
+
+        // Set the command object
+        this.commandObject = new CommandObject("", args);
+    }
+
+    private static mapArgumentsToVotingString(args: string[]): string {
         for (let i = 0; i < args.length; i++) {
             args[i] = ListEmoji[i] + ": " + args[i];
         }
@@ -31,8 +51,8 @@ export default class VotingPollCommand
     protected setup(): void {
         const author: User = this.message.author;
 
-        this.messageReply = `🌼 **${author.username}** had started a poll below!\n`;
-        this.messageReply += this.mapArgumentsToVotingString(
+        this.messageReply = `🌼 **${this.pollTitle}** - polled by <@!${author.id}> \n`;
+        this.messageReply += VotingPollCommand.mapArgumentsToVotingString(
             this.commandObject.arguments
         );
     }
