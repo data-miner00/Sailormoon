@@ -35,9 +35,6 @@ export default class VotingPollCommand
         this.messageReply += this.mapArgumentsToVotingString(
             this.commandObject.arguments
         );
-
-        console.log("command object");
-        console.log(this.commandObject);
     }
 
     // `this` context not available in callback
