@@ -23,6 +23,18 @@ export default class GeneralUtils {
     public static extractCommandSignature(message: Message): string {
         return message.content.split(" ")[0].slice(1) || "";
     }
+
+    public static DateParser(hourStr: string, minStr: string): Date {
+        const now: Date = new Date();
+
+        return new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate(),
+            Number(hourStr),
+            Number(minStr)
+        );
+    }
 }
 
 export function* activityGenerator() {
