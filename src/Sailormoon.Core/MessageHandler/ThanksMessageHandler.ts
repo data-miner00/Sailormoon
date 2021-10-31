@@ -3,10 +3,15 @@ import MessageHandler from "./MessageHandler";
 
 export default class ThanksMessageHandler extends MessageHandler {
     public conditionChecker(): boolean {
-        GratificationData.forEach((gratification: string): boolean => {
-            if (this.message.content.toLowerCase().search(gratification) >= 0)
+        for (var i = 0; i < GratificationData.length; i++) {
+            const containsGratification: boolean =
+                this.message.content
+                    .toLowerCase()
+                    .search(GratificationData[i]) >= 0;
+            if (containsGratification) {
                 return true;
-        });
+            }
+        }
         return false;
     }
 
