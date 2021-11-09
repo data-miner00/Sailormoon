@@ -1,21 +1,16 @@
 import axios from "axios";
 import { Message } from "discord.js";
-import GeneralUtils from "../Utility/GeneralUtils";
 import Command from "./Command";
-import CommandObject from "./CommandObject";
 
-export default class TeamCommand extends Command {
+export default class TeamCommand extends Command<string> {
     public commandSignature: string = "team";
-    private commandObj: CommandObject;
-    private replyMessage: string;
 
     public constructor(message: Message) {
         super(message);
-        this.commandObj = GeneralUtils.preprocessCommand(message);
     }
 
     protected async setup(): Promise<void> {
-        if (this.commandObj.arguments.includes("trees")) {
+        if (this.arguments.includes("trees")) {
             const res = await axios.get("https://teamtrees.org/", {
                 headers: {
                     "User-Agent": "",
@@ -27,25 +22,25 @@ export default class TeamCommand extends Command {
             );
 
             const count = match[1];
-            this.replyMessage = `#teamtrees: ${count} trees planted!`;
+            this.response = `#teamtrees: ${count} trees planted!`;
 
             // this.replyMessage = "Sorry, error occurred!";
-        } else if (this.commandObj.arguments.includes("seas")) {
+        } else if (this.arguments.includes("seas")) {
             const res = await axios.get(
                 "https://tscache.com/donation_total.json"
             );
 
             const count = res.data.count as string;
-            this.replyMessage = `#teamseas: ${count} pounds of plastic collected!`;
+            this.response = `#teamseas: ${count} pounds of plastic collected!`;
 
             // this.replyMessage = "Sorry, error occurred!";
         } else {
-            this.replyMessage = "Sorry, no such argument is supported!";
+            this.response = "Sorry, no such argument is supported!";
         }
     }
 
     public async execute(): Promise<void> {
         await this.setup();
-        this.message.channel.send(this.replyMessage);
+        this.message.channel.send(this.response).catch(this.catchError);
     }
 }

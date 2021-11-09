@@ -8,9 +8,10 @@ import PollCommand from "../Command/PollCommand";
 import TeamCommand from "../Command/TeamCommand";
 import VotingPollCommand from "../Command/VotingPollCommand";
 import GeneralUtils from "../Utility/GeneralUtils";
+import Sendable from "../Utility/Sendable";
 import Controller from "./Controller";
 
-export default class CommandController extends Controller<Command> {
+export default class CommandController extends Controller<Command<Sendable>> {
     // Register all the commands here with the pattern
     protected registerHandlers(): void {
         this.registerHandler(new PollCommand(this.message));
@@ -23,7 +24,7 @@ export default class CommandController extends Controller<Command> {
     }
 
     protected sendResponse(): void {
-        this.handlers.every((command: Command): boolean => {
+        this.handlers.every((command: Command<Sendable>): boolean => {
             const commandSignature: string =
                 GeneralUtils.extractCommandSignature(this.message);
             if (command.commandSignature == commandSignature) {

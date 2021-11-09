@@ -1,10 +1,11 @@
 import axios from "axios";
+import { Message } from "discord.js";
 import Configuration from "../App/Configuration";
 import EmojiList from "../Data/EmojiList";
 import Randomizer from "../Utility/Randomizer";
 import Command from "./Command";
 
-export default class JokeCommand extends Command {
+export default class JokeCommand extends Command<string> {
     public commandSignature: string = "joke";
 
     private static configuration: Configuration = Configuration.getInstance();
@@ -22,7 +23,9 @@ export default class JokeCommand extends Command {
     private static readonly jokeApi: string =
         "https://v2.jokeapi.dev/joke/Any?type=single";
 
-    #replyMessage: string;
+    public constructor(message: Message) {
+        super(message);
+    }
 
     protected async setup(): Promise<void> {
         const randint: number = Randomizer.PercentageRandomizer();
@@ -47,19 +50,19 @@ export default class JokeCommand extends Command {
 
     public async execute(): Promise<void> {
         await this.setup();
-        this.message.channel.send(this.#replyMessage).catch(this.catchError);
+        this.message.channel.send(this.response).catch(this.catchError);
     }
 
     private async getAppSpotJoke(): Promise<void> {
         const { data } = await axios.get(JokeCommand.appSpotJokeApi);
 
-        this.#replyMessage = this.jokeWithSetup(data.setup, data.punchline);
+        this.response = this.jokeWithSetup(data.setup, data.punchline);
     }
 
     private async getJoke(): Promise<void> {
         const { data } = await axios.get(JokeCommand.jokeApi);
 
-        this.#replyMessage = this.jokeWithoutSetup(data.joke);
+        this.response = this.jokeWithoutSetup(data.joke);
     }
 
     private async getRapidApiJoke(): Promise<void> {
@@ -74,7 +77,7 @@ export default class JokeCommand extends Command {
                 "x-rapidapi-host": JokeCommand.rapidapijokeApiHost,
             },
         });
-        this.#replyMessage = this.jokeWithSetup(data.setup, data.delivery);
+        this.response = this.jokeWithSetup(data.setup, data.delivery);
     }
 
     private async getRapidApiDadJoke(): Promise<void> {
