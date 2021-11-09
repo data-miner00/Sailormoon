@@ -1,8 +1,9 @@
 import * as dotenv from "dotenv";
+import EnvVariable from "./EnvVariable";
 
 export default class EnvLoader {
     public static isEnvLoaded(): boolean {
-        return this.queryEnv("discord") === null;
+        return this.queryEnv(EnvVariable.DISCORD_API_TOKEN) === null;
     }
 
     public static loadEnv(): void {
@@ -15,14 +16,7 @@ export default class EnvLoader {
         console.log(process.env);
     }
 
-    public static queryEnv(query: string): string {
-        switch (query) {
-            case "discord":
-                return process.env.DISCORD_API_TOKEN;
-            case "rapidapi":
-                return process.env.X_RAPIDAPI_KEY;
-            default:
-                return null;
-        }
+    public static queryEnv(variable: EnvVariable): string {
+        return process.env[variable.toString()];
     }
 }
