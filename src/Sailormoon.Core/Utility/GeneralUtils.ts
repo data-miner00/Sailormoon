@@ -24,6 +24,10 @@ export default class GeneralUtils {
         return message.content.split(" ")[0].slice(1) || "";
     }
 
+    public static extractCommandArguments(message: Message): Array<string> {
+        return message.content.split(" ").slice(1);
+    }
+
     public static DateParser(hourStr: string, minStr: string): Date {
         const now: Date = new Date();
 
