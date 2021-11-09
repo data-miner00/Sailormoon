@@ -54,41 +54,60 @@ export default class JokeCommand extends Command<string> {
     }
 
     private async getAppSpotJoke(): Promise<void> {
-        const { data } = await axios.get(JokeCommand.appSpotJokeApi);
+        try {
+            const { data } = await axios.get(JokeCommand.appSpotJokeApi);
 
-        this.response = this.jokeWithSetup(data.setup, data.punchline);
+            this.response = this.jokeWithSetup(data.setup, data.punchline);
+        } catch (error: unknown) {
+            this.response =
+                "Sorry, AppSpotJoke is currently unavailable, try another";
+        }
     }
 
     private async getJoke(): Promise<void> {
-        const { data } = await axios.get(JokeCommand.jokeApi);
+        try {
+            const { data } = await axios.get(JokeCommand.jokeApi);
 
-        this.response = this.jokeWithoutSetup(data.joke);
+            this.response = this.jokeWithoutSetup(data.joke);
+        } catch (error: unknown) {
+            this.response = "Sorry, Joke is currently unavailable, try another";
+        }
     }
 
     private async getRapidApiJoke(): Promise<void> {
-        const { data } = await axios.request({
-            method: "GET",
-            url: JokeCommand.rapidapijokeApi,
-            params: {
-                format: "json",
-            },
-            headers: {
-                "x-rapidapi-key": JokeCommand.configuration.xRapidApiKey,
-                "x-rapidapi-host": JokeCommand.rapidapijokeApiHost,
-            },
-        });
-        this.response = this.jokeWithSetup(data.setup, data.delivery);
+        try {
+            const { data } = await axios.request({
+                method: "GET",
+                url: JokeCommand.rapidapijokeApi,
+                params: {
+                    format: "json",
+                },
+                headers: {
+                    "x-rapidapi-key": JokeCommand.configuration.xRapidApiKey,
+                    "x-rapidapi-host": JokeCommand.rapidapijokeApiHost,
+                },
+            });
+            this.response = this.jokeWithSetup(data.setup, data.delivery);
+        } catch (error: unknown) {
+            this.response = "Sorry, rapidjoke is not available, try another";
+        }
     }
 
+    // Deprecating soon
     private async getRapidApiDadJoke(): Promise<void> {
-        const { data } = await axios.request({
-            method: "GET",
-            url: JokeCommand.rapidapidadjoke,
-            headers: {
-                "x-rapidapi-key": JokeCommand.configuration.xRapidApiKey,
-                "x-rapidapi-host": JokeCommand.rapidapidadjokeHost,
-            },
-        });
+        try {
+            const { data } = await axios.request({
+                method: "GET",
+                url: JokeCommand.rapidapidadjoke,
+                headers: {
+                    "x-rapidapi-key": JokeCommand.configuration.xRapidApiKey,
+                    "x-rapidapi-host": JokeCommand.rapidapidadjokeHost,
+                },
+            });
+            this.response = "hahahaha";
+        } catch (error: unknown) {
+            this.response = "dad joke ded";
+        }
     }
 
     private jokeWithSetup(setup: string, punchLine: string): string {
