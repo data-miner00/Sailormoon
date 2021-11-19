@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node dist/Program.js",
     "postinstall": "tsc",
-    "dev": "nodemon src/Program.ts"
+    "dev": "nodemon src/Program.ts",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Dunlop",
