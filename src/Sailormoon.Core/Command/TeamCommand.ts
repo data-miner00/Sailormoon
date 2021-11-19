@@ -22,7 +22,7 @@ export default class TeamCommand extends Command<string> {
             );
 
             const count = match[1];
-            this.response = `#teamtrees: ${count} trees planted!`;
+            this.response = `🎄 #teamtrees: ${count} trees planted! 🥳`;
 
             // this.replyMessage = "Sorry, error occurred!";
         } else if (this.arguments.includes("seas")) {
@@ -31,7 +31,7 @@ export default class TeamCommand extends Command<string> {
             );
 
             const count = res.data.count as string;
-            this.response = `#teamseas: ${count} pounds of plastic collected!`;
+            this.response = `🌊 #teamseas: ${count} pounds of plastic collected! 🎉`;
 
             // this.replyMessage = "Sorry, error occurred!";
         } else {
