@@ -19,19 +19,13 @@ export default class AskCommand extends Command<string> {
         const b = AskCommand.g(random);
 
         if (a > b) {
-            this.response = Randomizer.RandomElement([
-                "Yes",
-                "yeah",
-                "yep",
-                "yah",
-            ]);
+            this.response = AskCommand.optionalMaskProvider(
+                Randomizer.RandomElement(["Yes", "yeah", "yep", "yah"])
+            );
         } else {
-            this.response = Randomizer.RandomElement([
-                "No",
-                "Nope",
-                "Nah",
-                "naah",
-            ]);
+            this.response = AskCommand.optionalMaskProvider(
+                Randomizer.RandomElement(["No", "Nope", "Nah", "naah"])
+            );
         }
     }
 
@@ -46,5 +40,12 @@ export default class AskCommand extends Command<string> {
 
     private static g(x: number): number {
         return Math.cos(x) * Math.sin(2 * Math.PI * x);
+    }
+
+    private static optionalMaskProvider(response: string): string {
+        if (Randomizer.PercentageRandomizer() > 50) {
+            return `||${response}||`;
+        }
+        return response;
     }
 }
