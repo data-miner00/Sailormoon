@@ -1,24 +1,21 @@
 import Command from "./Command";
 import { MessageEmbed, Message } from "discord.js";
 import ICallbackable from "./ICallbackable";
-import CommandObject from "./CommandObject";
-import GeneralUtils from "../Utility/GeneralUtils";
 
-export default class PollCommand extends Command implements ICallbackable {
+export default class PollCommand
+    extends Command<MessageEmbed>
+    implements ICallbackable
+{
     public commandSignature: string = "poll";
-
-    #commandEmbed: MessageEmbed;
-    #commandObj: CommandObject;
 
     public constructor(message: Message) {
         super(message);
-        this.#commandObj = GeneralUtils.preprocessCommand(this.message);
-        this.#commandEmbed = new MessageEmbed();
+        this.response = new MessageEmbed();
     }
 
     protected setup(): void {
-        this.#commandEmbed
-            .setTitle(this.#commandObj.arguments.join(" "))
+        this.response
+            .setTitle(this.arguments.join(" "))
             .setColor("RANDOM")
             .setFooter("Powered by Zoo Melaka 🚒")
             .setAuthor(
@@ -36,7 +33,7 @@ export default class PollCommand extends Command implements ICallbackable {
     public execute(): void {
         this.setup();
         this.message.channel
-            .send(this.#commandEmbed)
+            .send(this.response)
             .then(this.setupCallback)
             .catch(this.catchError);
     }

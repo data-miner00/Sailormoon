@@ -1,20 +1,16 @@
 import { Message, MessageEmbed, User } from "discord.js";
 import Command from "./Command";
-import CommandObject from "./CommandObject";
-import GeneralUtils from "../Utility/GeneralUtils";
 import ListEmoji from "../Data/ListEmoji";
 import ICallbackable from "./ICallbackable";
 
 export default class VotingPollCommand
-    extends Command
+    extends Command<string>
     implements ICallbackable
 {
     public commandSignature: string = "vote";
 
-    private commandObject: CommandObject;
-    private messageReply: string;
-
     private pollTitle: string;
+    private customArguments: Array<string>;
 
     public constructor(message: Message) {
         super(message);
@@ -31,13 +27,10 @@ export default class VotingPollCommand
         let args: string[] = rawStringContent.split(";");
 
         // Trim arguments
-        args = args.map((arg) => arg.trim());
+        this.customArguments = args.map((arg) => arg.trim());
 
         // Set the first arg to title and remove it from args
-        this.pollTitle = args.splice(0, 1)[0];
-
-        // Set the command object
-        this.commandObject = new CommandObject("", args);
+        this.pollTitle = this.customArguments.splice(0, 1)[0];
     }
 
     private static mapArgumentsToVotingString(args: string[]): string {
@@ -51,9 +44,9 @@ export default class VotingPollCommand
     protected setup(): void {
         const author: User = this.message.author;
 
-        this.messageReply = `🌼 **${this.pollTitle}** - polled by <@!${author.id}> \n`;
-        this.messageReply += VotingPollCommand.mapArgumentsToVotingString(
-            this.commandObject.arguments
+        this.response = `🌼 **${this.pollTitle}** - polled by <@!${author.id}> \n`;
+        this.response += VotingPollCommand.mapArgumentsToVotingString(
+            this.customArguments
         );
     }
 
@@ -68,7 +61,7 @@ export default class VotingPollCommand
     public execute(): void {
         this.setup();
         this.message.channel
-            .send(this.messageReply)
+            .send(this.response)
             .then(this.setupCallback)
             .catch(this.catchError);
     }
