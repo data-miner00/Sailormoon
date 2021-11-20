@@ -5,8 +5,18 @@ import Command from "./Command";
 import CommandObject from "./CommandObject";
 import ICallbackable from "./ICallbackable";
 
-export default class BookingCommand extends Command implements ICallbackable {
+/*
+ * TODO!!!!!!!!!!!!!!!!
+ */
+export default class BookingCommand
+    extends Command<string>
+    implements ICallbackable
+{
     public commandSignature: string = "book";
+
+    public constructor(message: Message) {
+        super(message);
+    }
 
     private commandObj: CommandObject = GeneralUtils.preprocessCommand(
         this.message
