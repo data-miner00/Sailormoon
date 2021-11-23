@@ -2,6 +2,7 @@ import AskCommand from "../Command/AskCommand";
 import BookingCommand from "../Command/BookingCommand";
 import BoredCommand from "../Command/BoredCommand";
 import Command from "../Command/Command";
+import CryptoCommand from "../Command/CryptoCommand";
 import HashCommand from "../Command/HashCommand";
 import JokeCommand from "../Command/JokeCommand";
 import LieDetectorCommand from "../Command/LieDetectorCommand";
@@ -25,6 +26,7 @@ export default class CommandController extends Controller<Command<Sendable>> {
         this.registerHandler(new TeamCommand(this.message));
         this.registerHandler(new AskCommand(this.message));
         this.registerHandler(new HashCommand(this.message));
+        this.registerHandler(new CryptoCommand(this.message));
     }
 
     protected sendResponse(): void {
