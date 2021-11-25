@@ -91,8 +91,49 @@ export default class HttpHeader {
         return this._UserAgent;
     }
 
-    public AddCustomHeader(key: string, value: string): void {
+    public WithAccept(value: string): HttpHeader {
+        this.Accept = value;
+        return this;
+    }
+
+    public WithAcceptEncoding(value: string): HttpHeader {
+        this.AcceptEncoding = value;
+        return this;
+    }
+
+    public WithAcceptLanguage(value: string): HttpHeader {
+        this.AcceptLanguage = value;
+        return this;
+    }
+
+    public WithAltUsed(value: string): HttpHeader {
+        this.AltUsed = value;
+        return this;
+    }
+
+    public WithConnection(value: string): HttpHeader {
+        this.Connection = value;
+        return this;
+    }
+
+    public WithCookie(value: string): HttpHeader {
+        this.Cookie = value;
+        return this;
+    }
+
+    public WithReferer(value: string): HttpHeader {
+        this.Referer = value;
+        return this;
+    }
+
+    public WithUserAgent(value: string): HttpHeader {
+        this.UserAgent = value;
+        return this;
+    }
+
+    public WithCustomHeader(key: string, value: string): HttpHeader {
         this.CustomHeader[key] = value;
+        return this;
     }
 
     public JSON(stringify = false): Object | string {
