@@ -138,6 +138,7 @@ export default class CryptoCommand extends Command<MessageEmbed | string> {
                 ],
                 footer: {
                     text: `Powered by Coinmarketcap • ${date}`,
+                    iconURL: "https://coinmarketcap.com/favicon.ico",
                 },
             });
         } catch (error: unknown) {
