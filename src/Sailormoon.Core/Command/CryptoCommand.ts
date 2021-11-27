@@ -4,14 +4,19 @@ import axios from "axios";
 import Configuration from "../App/Configuration";
 import { LatestListing, LatestQuote, Currency } from "../Schemas/CoinMarketCap";
 import DateFormat from "../Utility/DateFormat";
+import Amount from "../Utility/Amount";
 
 export default class CryptoCommand extends Command<MessageEmbed | string> {
     public commandSignature: string = "crypto";
 
     public configuration: Configuration = Configuration.getInstance();
 
+    public amount: Amount;
+
     public constructor(message: Message) {
         super(message);
+
+        this.amount = new Amount();
     }
 
     private async latestListing(count: number = 20): Promise<void> {
@@ -59,11 +64,17 @@ export default class CryptoCommand extends Command<MessageEmbed | string> {
 
             const dynKey = Object.keys(data)[0];
             const currency = data[dynKey] as Currency;
+
+            const color =
+                currency.quote.USD.percent_change_24h > 0
+                    ? "#34D399"
+                    : "#F87171";
+
             this.response = new MessageEmbed({
                 title: currency.name,
                 description: `Latest info for ${currency.name} in USD`,
                 url: "https://coinmarketcap.com/",
-                color: "RANDOM",
+                color,
                 fields: [
                     {
                         name: "ID",
@@ -79,37 +90,49 @@ export default class CryptoCommand extends Command<MessageEmbed | string> {
                     },
                     {
                         name: "Market cap",
-                        value: currency.quote.USD.market_cap,
+                        value: this.amount.Verbose(
+                            currency.quote.USD.market_cap
+                        ),
                         inline: true,
                     },
                     {
                         name: "Price",
-                        value: currency.quote.USD.price,
+                        value: currency.quote.USD.price.toFixed(2),
                         inline: true,
                     },
                     {
                         name: "24hrs",
-                        value: currency.quote.USD.percent_change_24h,
+                        value:
+                            currency.quote.USD.percent_change_24h.toFixed(3) +
+                            "%",
                         inline: true,
                     },
                     {
                         name: "7days",
-                        value: currency.quote.USD.percent_change_7d,
+                        value:
+                            currency.quote.USD.percent_change_7d.toFixed(3) +
+                            "%",
                         inline: true,
                     },
                     {
                         name: "30days",
-                        value: currency.quote.USD.percent_change_30d,
+                        value:
+                            currency.quote.USD.percent_change_30d.toFixed(3) +
+                            "%",
                         inline: true,
                     },
                     {
                         name: "60days",
-                        value: currency.quote.USD.percent_change_60d,
+                        value:
+                            currency.quote.USD.percent_change_60d.toFixed(3) +
+                            "%",
                         inline: true,
                     },
                     {
                         name: "90days",
-                        value: currency.quote.USD.percent_change_90d,
+                        value:
+                            currency.quote.USD.percent_change_90d.toFixed(3) +
+                            "%",
                         inline: true,
                     },
                 ],
