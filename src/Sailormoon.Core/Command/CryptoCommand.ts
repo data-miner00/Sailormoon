@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import Command from "./Command";
 import axios from "axios";
 import Configuration from "../App/Configuration";
-import { LatestListing, LatestQuote, Quote } from "../Schemas/CoinMarketCap";
+import { LatestListing, LatestQuote, Currency } from "../Schemas/CoinMarketCap";
 import DateFormat from "../Utility/DateFormat";
 
 export default class CryptoCommand extends Command<MessageEmbed | string> {
@@ -58,58 +58,58 @@ export default class CryptoCommand extends Command<MessageEmbed | string> {
             const { status, data } = res.data as LatestQuote;
 
             const dynKey = Object.keys(data)[0];
-            const quote = data[dynKey] as Quote;
+            const currency = data[dynKey] as Currency;
             this.response = new MessageEmbed({
-                title: quote.name,
-                description: `Latest info for ${quote.name} in USD`,
+                title: currency.name,
+                description: `Latest info for ${currency.name} in USD`,
                 url: "https://coinmarketcap.com/",
                 color: "RANDOM",
                 fields: [
                     {
                         name: "ID",
-                        value: quote.id,
+                        value: currency.id,
                         inline: true,
                     },
                     {
                         name: "Added on",
                         value: new DateFormat()
-                            .FromISOString(quote.date_added)
+                            .FromISOString(currency.date_added)
                             .Format("DD/MM/yyyy"),
                         inline: true,
                     },
                     {
                         name: "Market cap",
-                        value: quote.quote.USD.market_cap,
+                        value: currency.quote.USD.market_cap,
                         inline: true,
                     },
                     {
                         name: "Price",
-                        value: quote.quote.USD.price,
+                        value: currency.quote.USD.price,
                         inline: true,
                     },
                     {
                         name: "24hrs",
-                        value: quote.quote.USD.percent_change_24h,
+                        value: currency.quote.USD.percent_change_24h,
                         inline: true,
                     },
                     {
                         name: "7days",
-                        value: quote.quote.USD.percent_change_7d,
+                        value: currency.quote.USD.percent_change_7d,
                         inline: true,
                     },
                     {
                         name: "30days",
-                        value: quote.quote.USD.percent_change_30d,
+                        value: currency.quote.USD.percent_change_30d,
                         inline: true,
                     },
                     {
                         name: "60days",
-                        value: quote.quote.USD.percent_change_60d,
+                        value: currency.quote.USD.percent_change_60d,
                         inline: true,
                     },
                     {
                         name: "90days",
-                        value: quote.quote.USD.percent_change_90d,
+                        value: currency.quote.USD.percent_change_90d,
                         inline: true,
                     },
                 ],

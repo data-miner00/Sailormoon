@@ -8,7 +8,7 @@ export class ResponseStatus {
     public readonly total_count: number;
 }
 
-export class QuoteInUSD {
+export class QuoteDetail {
     public readonly price: number;
     public readonly volume_24h: number;
     public readonly volume_change_24h: number;
@@ -24,11 +24,11 @@ export class QuoteInUSD {
     public readonly last_updated: string;
 }
 
-export class _Quote {
-    public readonly USD: QuoteInUSD;
+export class Quote {
+    [key: string]: QuoteDetail;
 }
 
-export class Quote {
+export class Currency {
     public readonly id: number;
     public readonly name: string;
     public readonly symbol: string;
@@ -42,13 +42,13 @@ export class Quote {
     public readonly platform?: any;
     public readonly cmc_rank: number;
     public readonly last_updated: string;
-    public readonly quote: _Quote;
+    public readonly quote: Quote;
 }
 
 // v1/cryptocurrency/listings/latest
 export class LatestListing {
     public readonly status: ResponseStatus;
-    public readonly data: Array<Quote>;
+    public readonly data: Array<Currency>;
 }
 
 // v1/cryptocurrency/quotes/latest
