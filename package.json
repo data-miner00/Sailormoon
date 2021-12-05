@@ -2,12 +2,13 @@
   "name": "sailormoon",
   "version": "1.0.0",
   "description": "A utiility and minimal discord bot :)",
-  "main": "index.js",
+  "main": "src/Program.ts",
   "scripts": {
     "start": "node dist/Program.js",
     "postinstall": "tsc",
     "dev": "nodemon src/Program.ts",
-    "test": "jest"
+    "test": "jest",
+    "sand": "node sandbox.js"
   },
   "keywords": [],
   "author": "Dunlop",
