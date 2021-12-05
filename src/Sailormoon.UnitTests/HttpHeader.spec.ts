@@ -27,7 +27,7 @@ describe("HttpHeader unit test", () => {
         httpHeader.Accept = "Haha";
         httpHeader.UserAgent = "Firefox";
 
-        httpHeader.AddCustomHeader("Custom-Header", "0GCustomValue");
+        httpHeader.WithCustomHeader("Custom-Header", "0GCustomValue");
 
         const expected = {
             Accept: "Haha",
