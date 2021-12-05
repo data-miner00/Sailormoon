@@ -158,7 +158,7 @@ export default class CryptoCommand extends Command<MessageEmbed | string> {
         ) {
             await this.latestQuote(this.arguments[0], "symbol");
         } else {
-            this.response = "Sorry but it is unsupported";
+            this.response = "Please provide a cryptocurrency symbol or slug";
         }
     }
 
