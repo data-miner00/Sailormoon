@@ -7,6 +7,8 @@ export default class HdlMessageHandler extends MessageHandler {
         return this.message.content.toLowerCase().includes("hdl");
     }
     public execute(): void {
-        this.message.reply(Randomizer.RandomElement(HdlReplyData));
+        if (Randomizer.PercentageRandomizer() > 30) {
+            this.message.reply(Randomizer.RandomElement(HdlReplyData));
+        }
     }
 }

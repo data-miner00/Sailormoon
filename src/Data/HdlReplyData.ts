@@ -1,1 +1,7 @@
-export default ["sleep storeroom", ":9135_blobunga:"];
+export default [
+    "sleep storeroom",
+    "punish",
+    "tc will treat hdl",
+    "no hdl",
+    "shut up",
+];
