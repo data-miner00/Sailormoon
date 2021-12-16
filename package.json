@@ -4,9 +4,9 @@
   "description": "A utiility and minimal discord bot :)",
   "main": "src/Program.ts",
   "scripts": {
-    "start": "node dist/Program.js",
+    "start": "node dist/Worker/Program.js",
     "postinstall": "tsc",
-    "dev": "nodemon src/Program.ts",
+    "dev": "nodemon src/Worker/Program.ts",
     "test": "jest",
     "sand": "node sandbox.js",
     "build": "tsc"
