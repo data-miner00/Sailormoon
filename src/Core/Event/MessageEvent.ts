@@ -1,7 +1,7 @@
 import EventType from "./EventType";
 import IEvent from "./IEvent";
 import { Message } from "discord.js";
-import GeneralUtils from "../Utility/GeneralUtils";
+import GeneralUtils from "../../Utilities/GeneralUtils";
 import CommandController from "../Controller/CommandController";
 import MessageController from "../Controller/MessageController";
 

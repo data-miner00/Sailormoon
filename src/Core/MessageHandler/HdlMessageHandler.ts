@@ -1,6 +1,6 @@
 import MessageHandler from "./MessageHandler";
-import HdlReplyData from "../Data/HdlReplyData";
-import Randomizer from "../Utility/Randomizer";
+import HdlReplyData from "../../Data/HdlReplyData";
+import Randomizer from "../../Utilities/Randomizer";
 
 export default class HdlMessageHandler extends MessageHandler {
     public conditionChecker(): boolean {

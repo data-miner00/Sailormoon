@@ -1,4 +1,4 @@
-import Randomizer from "../Utility/Randomizer";
+import Randomizer from "../../Utilities/Randomizer";
 import MessageHandler from "./MessageHandler";
 
 export default class VulgarMessageHandler extends MessageHandler {

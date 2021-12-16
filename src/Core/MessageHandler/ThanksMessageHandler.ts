@@ -1,4 +1,4 @@
-import GratificationData from "../Data/GratificationData";
+import GratificationData from "../../Data/GratificationData";
 import MessageHandler from "./MessageHandler";
 
 export default class ThanksMessageHandler extends MessageHandler {

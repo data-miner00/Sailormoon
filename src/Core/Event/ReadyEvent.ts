@@ -1,10 +1,10 @@
 import EventType from "./EventType";
 import IEvent from "./IEvent";
-import Application from "../App/Application";
+import Application from "../../Worker/Application";
 import { Client } from "discord.js";
 import ActivityType from "./ActivityType";
-import JobScheduler from "../Utility/JobScheduler";
-import { activityGenerator } from "../Utility/GeneralUtils";
+import JobScheduler from "../../Utilities/JobScheduler";
+import { activityGenerator } from "../../Utilities/GeneralUtils";
 import Activity from "./Activity";
 
 export default class ReadyEvent implements IEvent {

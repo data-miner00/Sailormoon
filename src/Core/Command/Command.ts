@@ -1,5 +1,5 @@
 import { Message } from "discord.js";
-import GeneralUtils from "../Utility/GeneralUtils";
+import GeneralUtils from "../../Utilities/GeneralUtils";
 import Sendable from "../Utility/Sendable";
 
 export default abstract class Command<T extends Sendable> {

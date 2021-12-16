@@ -1,6 +1,6 @@
 import { Message, User } from "discord.js";
 import Command from "./Command";
-import Randomizer from "../Utility/Randomizer";
+import Randomizer from "../../Utilities/Randomizer";
 
 export default class LieDetectorCommand extends Command<string> {
     public commandSignature: string = "lie";

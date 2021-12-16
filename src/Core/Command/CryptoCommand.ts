@@ -1,10 +1,10 @@
 import { Message, MessageEmbed } from "discord.js";
 import Command from "./Command";
 import axios from "axios";
-import Configuration from "../App/Configuration";
+import Configuration from "../../Configuration";
 import { LatestListing, LatestQuote, Currency } from "../Schemas/CoinMarketCap";
-import DateFormat from "../Utility/DateFormat";
-import Amount from "../Utility/Amount";
+import DateFormat from "../../Utilities/DateFormat";
+import Amount from "../../Utilities/Amount";
 
 export default class CryptoCommand extends Command<MessageEmbed | string> {
     public commandSignature: string = "crypto";

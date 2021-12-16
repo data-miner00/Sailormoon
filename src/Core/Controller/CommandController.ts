@@ -10,7 +10,7 @@ import MsiaCovidCommand from "../Command/MsiaCovidCommand";
 import PollCommand from "../Command/PollCommand";
 import TeamCommand from "../Command/TeamCommand";
 import VotingPollCommand from "../Command/VotingPollCommand";
-import GeneralUtils from "../Utility/GeneralUtils";
+import GeneralUtils from "../../Utilities/GeneralUtils";
 import Sendable from "../Utility/Sendable";
 import Controller from "./Controller";
 

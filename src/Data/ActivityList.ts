@@ -1,4 +1,4 @@
-import ActivityType from "../Event/ActivityType";
+import ActivityType from "../Core/Event/ActivityType";
 
 export default [
     {

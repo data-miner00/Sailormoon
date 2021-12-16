@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
-import GeneralUtils from "../Utility/GeneralUtils";
-import JobScheduler from "../Utility/JobScheduler";
+import GeneralUtils from "../../Utilities/GeneralUtils";
+import JobScheduler from "../../Utilities/JobScheduler";
 import Command from "./Command";
 import CommandObject from "./CommandObject";
 import ICallbackable from "./ICallbackable";

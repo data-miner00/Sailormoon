@@ -1,6 +1,6 @@
 import { Message, MessageEmbed, User } from "discord.js";
 import Command from "./Command";
-import ListEmoji from "../Data/ListEmoji";
+import ListEmoji from "../../Data/ListEmoji";
 import ICallbackable from "./ICallbackable";
 
 export default class VotingPollCommand

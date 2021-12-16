@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Message } from "discord.js";
-import Configuration from "../App/Configuration";
-import EmojiList from "../Data/EmojiList";
-import Randomizer from "../Utility/Randomizer";
+import Configuration from "../../Configuration";
+import EmojiList from "../../Data/EmojiList";
+import Randomizer from "../../Utilities/Randomizer";
 import Command from "./Command";
 
 export default class JokeCommand extends Command<string> {

@@ -1,5 +1,5 @@
 import { Message } from "discord.js";
-import Randomizer from "../Utility/Randomizer";
+import Randomizer from "../../Utilities/Randomizer";
 import Command from "./Command";
 
 export default class AskCommand extends Command<string> {

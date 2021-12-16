@@ -1,7 +1,7 @@
-import Message from "./Core/Event/MessageEvent";
-import Application from "./Core/App/Application";
-import Configuration from "./Core/App/Configuration";
-import Ready from "./Core/Event/ReadyEvent";
+import Message from "../Core/Event/MessageEvent";
+import Application from "./Application";
+import Configuration from "../Configuration";
+import Ready from "../Core/Event/ReadyEvent";
 
 class Program {
     public static Main(): void {

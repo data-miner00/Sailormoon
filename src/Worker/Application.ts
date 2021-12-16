@@ -1,5 +1,5 @@
 import { Client } from "discord.js";
-import IEvent from "../Event/IEvent";
+import IEvent from "../Core/Event/IEvent";
 
 export default class Application {
     private static instance: Application;
