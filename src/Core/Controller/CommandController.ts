@@ -11,7 +11,7 @@ import PollCommand from "../Command/PollCommand";
 import TeamCommand from "../Command/TeamCommand";
 import VotingPollCommand from "../Command/VotingPollCommand";
 import GeneralUtils from "../../Utilities/GeneralUtils";
-import Sendable from "../Utility/Sendable";
+import Sendable from "../Typedef/Sendable";
 import Controller from "./Controller";
 
 export default class CommandController extends Controller<Command<Sendable>> {

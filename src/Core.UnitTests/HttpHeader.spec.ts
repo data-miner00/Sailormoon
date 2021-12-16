@@ -1,4 +1,4 @@
-import HttpHeader from "../Core/Utility/HttpHeader";
+import HttpHeader from "../Core/Typedef/HttpHeader";
 
 describe("HttpHeader unit test", () => {
     let httpHeader: HttpHeader;
