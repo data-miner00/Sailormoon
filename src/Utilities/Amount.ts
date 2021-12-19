@@ -17,6 +17,8 @@ export default class Amount {
                 return formatAmount(6, this.th[2]);
             case amt_str.length > 3:
                 return formatAmount(3, this.th[1]);
+            default:
+                return amt_str;
         }
     }
 }
