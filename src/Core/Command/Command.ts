@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
-import GeneralUtils from "../Utility/GeneralUtils";
-import Sendable from "../Utility/Sendable";
+import GeneralUtils from "../../Utilities/GeneralUtils";
+import Sendable from "../Typedef/Sendable";
 
 export default abstract class Command<T extends Sendable> {
     public abstract commandSignature: string;

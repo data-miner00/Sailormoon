@@ -1,6 +1,6 @@
 import { Message, User } from "discord.js";
-import Configuration from "../App/Configuration";
-import CommandObject from "../Command/CommandObject";
+import Configuration from "../Configuration";
+import CommandObject from "../Core/Command/CommandObject";
 import activities from "../Data/ActivityList";
 
 export default class GeneralUtils {

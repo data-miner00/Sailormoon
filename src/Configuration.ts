@@ -1,5 +1,5 @@
-import EnvHelper from "../Utility/EnvHelper";
-import EnvVariable from "../Utility/EnvVariable";
+import EnvHelper from "./Utilities/EnvHelper";
+import EnvVariable from "./Utilities/EnvVariable";
 
 export default class Configuration {
     #commandPrefix: string;
