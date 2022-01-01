@@ -1,1 +1,1 @@
-worker: node dist/Program.js
+worker: node dist/Worker/Program.js
