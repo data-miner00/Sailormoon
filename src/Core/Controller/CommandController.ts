@@ -13,6 +13,7 @@ import VotingPollCommand from "../Command/VotingPollCommand";
 import GeneralUtils from "../../Utilities/GeneralUtils";
 import Sendable from "../Typedef/Sendable";
 import Controller from "./Controller";
+import PunishCommand from "../Command/PunishCommand";
 
 export default class CommandController extends Controller<Command<Sendable>> {
     // Register all the commands here with the pattern
@@ -27,6 +28,7 @@ export default class CommandController extends Controller<Command<Sendable>> {
         this.registerHandler(new AskCommand(this.message));
         this.registerHandler(new HashCommand(this.message));
         this.registerHandler(new CryptoCommand(this.message));
+        this.registerHandler(new PunishCommand(this.message));
     }
 
     protected sendResponse(): void {
