@@ -7,7 +7,7 @@ export default class ReadyEvent extends BaseEvent {
         super("ready");
     }
 
-    public EventHandler(): void {
+    public EventHandler = (): void => {
         const {
             events: { ready },
         } = settings;
@@ -15,12 +15,14 @@ export default class ReadyEvent extends BaseEvent {
         console.log(ready.message);
 
         // TODO: Check for types? Throw if incorrect?
-        this.bot.user.setActivity(ready.activity.subject, {
-            type: ready.activity.type as ActivityType,
-        });
+        this.bot.user
+            .setActivity(ready.activity.subject, {
+                type: ready.activity.type as ActivityType,
+            })
+            .catch(console.error);
 
         this.bot.user.setPresence({
             status: ready.presence.status as PresenceStatusData,
         });
-    }
+    };
 }
