@@ -1,15 +1,15 @@
 {
-    "prefix": "kyle",
-    "events": {
-        "ready": {
-            "message": "I'm ready",
-            "activity": {
-                "type": "LISTENING",
-                "subject": "Violin Sonata No 9 Kreutzer First Movement"
-            },
-            "presence": {
-                "status": "idle"
-            }
-        }
+  "prefix": "kyle",
+  "events": {
+    "ready": {
+      "message": "I'm ready",
+      "activity": {
+        "type": "LISTENING",
+        "subject": "Violin Sonata No 9 Kreutzer First Movement"
+      },
+      "presence": {
+        "status": "idle"
+      }
     }
+  }
 }
