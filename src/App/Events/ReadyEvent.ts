@@ -14,16 +14,11 @@ export default class ReadyEvent extends BaseEvent {
 
         console.log(ready.message);
 
-        // TODO: Check for types? Throw if incorrect?
-        setTimeout(() => {
-            this.bot.user
-                .setActivity(ready.activity.subject, {
-                    type: ready.activity.type as ActivityType,
-                })
-                .catch(console.error);
-        }, 1000);
-
         this.bot.user.setPresence({
+            activity: {
+                name: ready.activity.subject,
+                type: ready.activity.type as ActivityType,
+            },
             status: ready.presence.status as PresenceStatusData,
         });
     };
