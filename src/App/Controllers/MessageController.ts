@@ -1,6 +1,6 @@
 import Controller from "../../Core/Controller/Controller";
 import MessageHandler from "../../Core/Handlers/MessageHandler";
-import HelloMessage from "../Handlers/Message/HelloMessage";
+import { HelloMessage } from "../Handlers/Message";
 
 export default class MessageController extends Controller<MessageHandler> {
     protected RegisterHandlers(): void {
