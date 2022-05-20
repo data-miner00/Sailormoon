@@ -1,8 +1,6 @@
 import Controller from "../../Core/Controller/Controller";
 import CommandHandler from "../../Core/Handlers/CommandHandler";
-import { PingCommand } from "../Handlers/Command/";
-import HashCommand from "../Handlers/Command/HashCommand";
-import HelpCommand from "../Handlers/Command/HelpCommand";
+import { PingCommand, HashCommand, HelpCommand } from "../Handlers/Command/";
 
 export default class CommandController extends Controller<CommandHandler> {
     protected RegisterHandlers(): void {
