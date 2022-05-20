@@ -105,7 +105,6 @@ describe("Command Parser", () => {
                     },
                 ],
             },
-            skip: true,
         },
         {
             description: "Should parse command with no arguments",
@@ -126,11 +125,10 @@ describe("Command Parser", () => {
             },
         },
     ].forEach((scenario) => {
-        if (!scenario.skip)
-            it(scenario.description, () => {
-                const actual = Parse(scenario.input);
+        it(scenario.description, () => {
+            const actual = Parse(scenario.input);
 
-                expect(actual).toEqual(scenario.expected);
-            });
+            expect(actual).toEqual(scenario.expected);
+        });
     });
 });

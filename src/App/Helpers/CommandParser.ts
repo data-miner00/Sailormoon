@@ -1,8 +1,8 @@
-const commandRegex =
-    /(?<=[-{1,2}|/])(?<name>[a-zA-Z0-9]*)[ |:|"]*(?<value>[\w|.|?|=|&|+| |:|/|\\]*)(?=[ |"]|$)/gm;
-const quotedStringRegex = /["'](.*?)["']/gm;
-
 export function Parse(input: string) {
+    const commandRegex =
+        /(?<=[-{1,2}|/])(?<name>[a-zA-Z0-9]*)[ |:|"]*(?<value>[\w|.|?|=|&|+| |:|/|\\]*)(?=[ |"]|$)/gm;
+    const quotedStringRegex = /["'](.*?)["']/gm;
+
     /*
      *
      */
