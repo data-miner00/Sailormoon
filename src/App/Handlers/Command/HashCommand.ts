@@ -7,7 +7,7 @@ export default class HashCommand extends CommandHandler {
         return this.message.content.startsWith(`${this.prefix} hash`);
     }
     public Handle(): void {
-        let algorithm: string;
+        let algorithm: string = "sha256";
         const digest = Parse(this.message.content);
 
         if (!digest.subject) {
@@ -15,9 +15,7 @@ export default class HashCommand extends CommandHandler {
             return;
         }
 
-        if (digest.flags.length === 0) {
-            algorithm = "sha256";
-        } else if (digest.flags.length === 1) {
+        if (digest.flags.length === 1) {
             const kv = digest.flags[0];
             if (kv.name !== "algo") {
                 this.message.channel.send(
