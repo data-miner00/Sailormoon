@@ -8,7 +8,7 @@ export default abstract class Handler implements IHandler {
     public abstract ConditionChecker(): boolean;
     public abstract Handle(): void;
 
-    public constructor(message: Message) {
+    protected constructor(message: Message) {
         this.message = message;
     }
 }
