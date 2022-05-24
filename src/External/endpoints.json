@@ -1,0 +1,22 @@
+{
+  "Coinmarketcap": {
+    "baseUrl": "https://pro-api.coinmarketcap.com",
+    "category": {
+      "cryptocurrency": [
+        {
+          "description": "Returns list of cryptocurrencies with data",
+          "relativeUrl": "v1/cryptocurrency/listings/latest"
+        },
+        {
+          "description": "Return static metadata available for one or more cryptocurrencies.",
+          "relativeUrl": "v2/cryptocurrency/info"
+        },
+        {
+          "description": "",
+          "relativeUrl": ""
+        }
+      ],
+      "exchange": {}
+    }
+  }
+}
