@@ -9,7 +9,7 @@ export default abstract class BaseEvent implements IEvent {
     ): void;
     public bot: Client;
 
-    public constructor(eventName: keyof ClientEvents) {
+    protected constructor(eventName: keyof ClientEvents) {
         this.eventName = eventName;
         this.bot = Application.GetInstance()._bot;
     }
