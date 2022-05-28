@@ -59,8 +59,12 @@ export default class RelayMessageCommand extends CommandHandler {
             return;
         }
 
+        const escapeString = "<>";
+
         if (channel instanceof TextChannel) {
-            channel.send(digest.subject).catch(this.message.channel.send);
+            channel
+                .send(digest.subject.replace(escapeString, ""))
+                .catch(this.message.channel.send);
         }
     }
 }
