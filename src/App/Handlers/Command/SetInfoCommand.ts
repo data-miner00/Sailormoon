@@ -11,7 +11,11 @@ export default class SetInfoCommand extends CommandHandler {
     public Handle(): void {
         const digest = Parse(this.message.content);
         const bot = Application.GetInstance()._bot;
-        const criteria = digest.flags[0].name ?? "activity";
+
+        const criteriaFlag = digest.flags.find((f) =>
+            ["activity", "watching", "listening"].includes(f.name)
+        );
+        const criteria = criteriaFlag.name ?? "activity";
 
         if (!digest.subject) {
             this.message.channel.send(
@@ -24,9 +28,21 @@ export default class SetInfoCommand extends CommandHandler {
             case "activity":
                 let activityType: ActivityType = "PLAYING";
 
-                if (digest.flags[1]?.name === "type") {
-                    activityType =
-                        digest.flags[1].value.toUpperCase() as ActivityType;
+                const typeFlag = digest.flags.find((f) => f.name == "type");
+
+                if (typeFlag) {
+                    const inputActivityType = typeFlag.value.toUpperCase();
+
+                    if (!this.ValidateActivityType(inputActivityType)) {
+                        this.message.channel.send(
+                            "The activity type " +
+                                inputActivityType.toLowerCase() +
+                                " is not supported. Try `playing`, `listening` or `watching` instead."
+                        );
+                        return;
+                    }
+
+                    activityType = inputActivityType;
                 }
 
                 bot.user.setActivity({
@@ -37,5 +53,13 @@ export default class SetInfoCommand extends CommandHandler {
                 this.message.channel.send("Successfully set " + criteria);
                 break;
         }
+    }
+
+    private ValidateActivityType(
+        activityType: string
+    ): activityType is ActivityType {
+        return ["PLAYING", "STREAMING", "LISTENING", "WATCHING"].includes(
+            activityType
+        );
     }
 }
