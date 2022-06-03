@@ -13,9 +13,9 @@ export default class SetInfoCommand extends CommandHandler {
         const bot = Application.GetInstance()._bot;
 
         const criteriaFlag = digest.flags.find((f) =>
-            ["activity", "watching", "listening"].includes(f.name)
+            ["activity", "avatar"].includes(f.name)
         );
-        const criteria = criteriaFlag.name ?? "activity";
+        const criteria = criteriaFlag?.name ?? "activity";
 
         if (!digest.subject) {
             this.message.channel.send(
@@ -51,6 +51,19 @@ export default class SetInfoCommand extends CommandHandler {
                 });
 
                 this.message.channel.send("Successfully set " + criteria);
+                break;
+
+            case "avatar":
+                bot.user
+                    .setAvatar(digest.subject)
+                    .then(() => {
+                        this.message.channel.send("Successfully set avatar");
+                    })
+                    .catch((reason) => {
+                        this.message.channel.send(
+                            "Set avatar unsuccessful. Reason: " + reason
+                        );
+                    });
                 break;
         }
     }
