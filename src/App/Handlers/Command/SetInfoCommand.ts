@@ -1,4 +1,4 @@
-import { ActivityType } from "discord.js";
+import { ActivityType, PresenceStatusData } from "discord.js";
 import CommandHandler from "../../../Core/Handlers/CommandHandler";
 import Application from "../../Application";
 import { Parse } from "../../Helpers/CommandParser";
@@ -13,7 +13,7 @@ export default class SetInfoCommand extends CommandHandler {
         const bot = Application.GetInstance()._bot;
 
         const criteriaFlag = digest.flags.find((f) =>
-            ["activity", "avatar"].includes(f.name)
+            ["activity", "avatar", "status"].includes(f.name)
         );
         const criteria = criteriaFlag?.name ?? "activity";
 
@@ -78,6 +78,32 @@ export default class SetInfoCommand extends CommandHandler {
                     });
                 break;
 
+            case "status":
+                const statusFlag = digest.flags.find(
+                    (f) => f.name === "status"
+                );
+
+                if (statusFlag) {
+                    const inputStatusFlag = digest.subject.toLowerCase();
+
+                    if (!this.ValidatePresenceStatus(inputStatusFlag)) {
+                        this.message.channel.send(
+                            `The status "${digest.subject}" is invalid.`
+                        );
+                        return;
+                    }
+
+                    bot.user
+                        .setStatus(inputStatusFlag)
+                        .then(() => {
+                            this.message.react("🆗");
+                        })
+                        .catch(() => {
+                            this.message.react("❌");
+                        });
+                }
+                break;
+
             default:
                 // unreachable code
                 this.message.channel.send(
@@ -92,5 +118,11 @@ export default class SetInfoCommand extends CommandHandler {
         return ["PLAYING", "STREAMING", "LISTENING", "WATCHING"].includes(
             activityType
         );
+    }
+
+    private ValidatePresenceStatus(
+        presenceStatus: string
+    ): presenceStatus is PresenceStatusData {
+        return ["dnd", "idle", "invisible", "online"].includes(presenceStatus);
     }
 }
