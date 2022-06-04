@@ -45,26 +45,44 @@ export default class SetInfoCommand extends CommandHandler {
                     activityType = inputActivityType;
                 }
 
-                bot.user.setActivity({
-                    name: digest.subject,
-                    type: activityType,
-                });
+                bot.user
+                    .setActivity({
+                        name: digest.subject,
+                        type: activityType,
+                    })
+                    .then(() => {
+                        this.message.channel.send(
+                            `> (●'◡'●) ${this.message.author.username} has updated my status.`
+                        );
+                    })
+                    .catch((reason) => {
+                        this.message.channel.send(
+                            `> (┬┬﹏┬┬) Status update failed because ${reason}`
+                        );
+                    });
 
-                this.message.channel.send("Successfully set " + criteria);
                 break;
 
             case "avatar":
                 bot.user
                     .setAvatar(digest.subject)
                     .then(() => {
-                        this.message.channel.send("Successfully set avatar");
+                        this.message.channel.send(
+                            `> (●'◡'●) ${this.message.author.username} has updated my avatar.`
+                        );
                     })
                     .catch((reason) => {
                         this.message.channel.send(
-                            "Set avatar unsuccessful. Reason: " + reason
+                            `> (┬┬﹏┬┬) Avatar update failed because ${reason}`
                         );
                     });
                 break;
+
+            default:
+                // unreachable code
+                this.message.channel.send(
+                    "> Sorry, the criteria specified is not recognized. Try `--activity`, `--avatar` or `--blah` instead."
+                );
         }
     }
 
