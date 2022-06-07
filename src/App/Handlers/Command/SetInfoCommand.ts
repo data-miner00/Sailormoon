@@ -13,7 +13,7 @@ export default class SetInfoCommand extends CommandHandler {
         const bot = Application.GetInstance()._bot;
 
         const criteriaFlag = digest.flags.find((f) =>
-            ["activity", "avatar", "status"].includes(f.name)
+            ["activity", "avatar", "status", "name"].includes(f.name)
         );
         const criteria = criteriaFlag?.name ?? "activity";
 
@@ -88,7 +88,7 @@ export default class SetInfoCommand extends CommandHandler {
 
                     if (!this.ValidatePresenceStatus(inputStatusFlag)) {
                         this.message.channel.send(
-                            `The status "${digest.subject}" is invalid.`
+                            `The status "${digest.subject}" is invalid. Please try \`online\`, \`dnd\` or \`idle\` instead.`
                         );
                         return;
                     }
@@ -102,6 +102,22 @@ export default class SetInfoCommand extends CommandHandler {
                             this.message.react("❌");
                         });
                 }
+                break;
+
+            case "name":
+                bot.user
+                    .setUsername(digest.subject)
+                    .then(() => {
+                        this.message.channel.send(
+                            `> (●'◡'●) ${this.message.author.username} has updated my username.`
+                        );
+                    })
+                    .catch((reason) => {
+                        this.message.channel.send(
+                            `> (┬┬﹏┬┬) Avatar update failed because ${reason}`
+                        );
+                    });
+
                 break;
 
             default:
