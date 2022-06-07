@@ -12,8 +12,8 @@
           "relativeUrl": "v2/cryptocurrency/info"
         },
         {
-          "description": "",
-          "relativeUrl": ""
+          "description": "Returns the latest market quote for 1 or more cryptocurrencies.",
+          "relativeUrl": "v2/cryptocurrency/quotes/latest"
         }
       ],
       "exchange": {}
