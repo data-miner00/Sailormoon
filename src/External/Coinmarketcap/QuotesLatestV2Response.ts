@@ -13,7 +13,9 @@ export interface QuotesLatestV2Response {
             max_supply: number;
             last_updated: string;
             date_added: string;
-            tags: Array<string>;
+            tags: Array<
+                { slug: string; name: string; category: string } | string
+            >;
             platform?: {
                 id: number;
                 name: string;
