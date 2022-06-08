@@ -1,3 +1,4 @@
+import { randomInt } from "crypto";
 import { DMChannel, TextChannel } from "discord.js";
 import CommandHandler from "../../../Core/Handlers/CommandHandler";
 import Application from "../../Application";
@@ -62,9 +63,15 @@ export default class RelayMessageCommand extends CommandHandler {
         const escapeString = "<>";
 
         if (channel instanceof TextChannel) {
-            channel
-                .send(digest.subject.replace(escapeString, ""))
-                .catch(this.message.channel.send);
+            channel.startTyping();
+
+            setTimeout(() => {
+                channel
+                    .send(digest.subject.replace(escapeString, ""))
+                    .then(() => this.message.react("🍪"))
+                    .catch(this.message.channel.send);
+                channel.stopTyping();
+            }, randomInt(1000, 3000));
         }
     }
 }
