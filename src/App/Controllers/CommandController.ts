@@ -7,6 +7,7 @@ import {
     RelayMessageCommand,
     SetInfoCommand,
     CmcCommand,
+    TeamCommand,
 } from "../Handlers/Command/";
 
 export default class CommandController extends Controller<CommandHandler> {
@@ -17,5 +18,6 @@ export default class CommandController extends Controller<CommandHandler> {
         this.RegisterHandler(new RelayMessageCommand(this.message));
         this.RegisterHandler(new SetInfoCommand(this.message));
         this.RegisterHandler(new CmcCommand(this.message));
+        this.RegisterHandler(new TeamCommand(this.message));
     }
 }

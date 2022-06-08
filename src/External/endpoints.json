@@ -18,5 +18,13 @@
       ],
       "exchange": {}
     }
+  },
+  "Teams": {
+    "Trees": {
+      "url": "https://teamtrees.org/"
+    },
+    "Seas": {
+      "url": "https://tscache.com/donation_total.json"
+    }
   }
 }
