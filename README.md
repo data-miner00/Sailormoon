@@ -26,7 +26,7 @@ export default class MyNewEvent extends BaseEvent {
 
 The constructor lets the base class know the actual event that are being handled and the `EventHandler` is where the actual implementation codes for the event goes.
 
-To register, go to the `Program.ts` aforementioned.
+To register, go to the `Program.ts` aforementioned and add the new event class with `app.RegisterEvent`.
 
 ```ts
 import { $ } from "../Core/Environment";
@@ -51,9 +51,6 @@ class Program {
 
 Program.Main();
 ```
-
-Just use the `app.RegisterEvent` to register.
-
 
 ### Message Event
 
