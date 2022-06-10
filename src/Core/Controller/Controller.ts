@@ -1,6 +1,7 @@
 import { Message } from "discord.js";
+import Handler from "../Handlers/Handler";
 
-export default abstract class Controller<T> {
+export default abstract class Controller<T extends Handler> {
     protected message: Message;
     protected handlers: Array<T>;
 
@@ -8,14 +9,23 @@ export default abstract class Controller<T> {
         this.message = message;
         this.handlers = [];
 
-        this.registerHandlers();
-        this.sendResponse();
+        this.RegisterHandlers();
+        this.SendResponse();
     }
 
-    protected registerHandler(t: T): void {
-        this.handlers.push(t);
+    protected RegisterHandler(handler: T): void {
+        this.handlers.push(handler);
     }
-    protected abstract registerHandlers(): void;
 
-    protected abstract sendResponse(): void;
+    protected abstract RegisterHandlers(): void;
+
+    protected SendResponse(): void {
+        this.handlers.every((handler: T): boolean => {
+            if (handler.ConditionChecker()) {
+                handler.Handle();
+                return false;
+            }
+            return true;
+        });
+    }
 }

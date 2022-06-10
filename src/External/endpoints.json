@@ -1,0 +1,30 @@
+{
+  "Coinmarketcap": {
+    "baseUrl": "https://pro-api.coinmarketcap.com",
+    "category": {
+      "cryptocurrency": [
+        {
+          "description": "Returns list of cryptocurrencies with data",
+          "relativeUrl": "v1/cryptocurrency/listings/latest"
+        },
+        {
+          "description": "Return static metadata available for one or more cryptocurrencies.",
+          "relativeUrl": "v2/cryptocurrency/info"
+        },
+        {
+          "description": "Returns the latest market quote for 1 or more cryptocurrencies.",
+          "relativeUrl": "v2/cryptocurrency/quotes/latest"
+        }
+      ],
+      "exchange": {}
+    }
+  },
+  "Teams": {
+    "Trees": {
+      "url": "https://teamtrees.org/"
+    },
+    "Seas": {
+      "url": "https://tscache.com/donation_total.json"
+    }
+  }
+}
