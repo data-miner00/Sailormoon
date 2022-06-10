@@ -1,6 +1,6 @@
 // API Reference: https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyListingsLatest
 
-export interface ListingLatestQueryParams {
+export class ListingLatestQueryParams {
     /*
      * Optionally offset the start (1-based index) of the paginated list of items to return.
      * integer >= 1
